@@ -1,0 +1,74 @@
+# Composer dependencies
+/vendor/
+composer.lock
+
+# Environment variables
+.env
+.env.local
+.env.*.local
+
+# IDE and Editor
+.idea/
+.vscode/
+*.sublime-workspace
+*.sublime-project
+.netbeans/
+nbproject/
+
+# OS specific files
+.DS_Store
+Thumbs.db
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+
+# Cache and logs
+/cache/*
+/logs/*
+/tmp/*
+*.log
+
+# Uploads and media
+/uploads/
+/media/
+/assets/user-uploads/
+
+# Session files
+/sessions/
+/tmp/sessions/
+
+# Node modules (if using Node for build tools)
+node_modules/
+package-lock.json
+yarn.lock
+
+# Build files
+/dist/
+/build/
+
+# Laravel specific
+/public/hot
+/public/storage
+/storage/*.key
+
+# Symfony specific
+/config/secrets/prod/override.env.php
+
+# WordPress specific (if applicable)
+/wp-config-local.php
+/wp-content/uploads/
+/wp-content/plugins/*/node_modules/
+
+# Backup files
+*.backup
+*.bak
+*~
+
+# PHPUnit
+/tests/_output/
+/.phpunit.result.cache
+
+#Miscellaneous
+*.saved_content.json
