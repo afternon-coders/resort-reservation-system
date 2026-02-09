@@ -7,16 +7,15 @@
     $conn = "";
 
 
-    $conn = mysqli_connect($db_server, 
-                            $db_user, 
-                            $db_pass, 
+    $conn = mysqli_connect($db_server,
+                            $db_user,
+                            $db_pass,
                             $db_name);
 
-    if($conn){
-        echo "You are connected";
-    }
-    else{
-        echo "Not connected";
+    // Do not echo connection status here so this file can be safely included
+    // by helper libraries. On failure, write to error log for diagnosis.
+    if (!$conn) {
+        error_log('Database connection failed: ' . mysqli_connect_error());
     }
 
 ?>
