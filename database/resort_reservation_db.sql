@@ -17,7 +17,7 @@ CREATE TABLE guests (
 -- =========================
 CREATE TABLE rooms (
     room_id INT AUTO_INCREMENT PRIMARY KEY,
-    room_number VARCHAR(10) UNIQUE NOT NULL,
+    room_number VARCHAR(10) x NOT NULL,
     room_type VARCHAR(50) NOT NULL,
     price_per_night DECIMAL(10,2) NOT NULL,
     status ENUM('available', 'occupied', 'maintenance') DEFAULT 'available'
