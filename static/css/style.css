@@ -20,7 +20,7 @@ body {
 /* NAVBAR */
 /* ========================= */
 .navbar {
-    position: absolute;
+    position: fixed; 
     width: 100%;
     top: 0;
     left: 0;
@@ -28,13 +28,6 @@ body {
     padding: 20px 0; /* only top/bottom padding */
     z-index: 1000;
 }
-
-/* .nav-container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin: 0 20px;     
-} */
 
 .nav-container {
     display: flex;
@@ -187,6 +180,161 @@ body {
     background: white;
     color: #333;
 }
+
+
+
+
+
+
+
+
+
+.description {
+    padding: 80px 0;
+    background: #FDFCF8;
+    text-align: center;
+}
+
+.section-header h2 {
+    font-size: 36px;
+    color: #000000;
+    margin-bottom: 20px;
+}
+
+.section-subtitle {
+    max-width: 800px;
+    margin: 0 auto;
+    font-size: 18px;
+    line-height: 1.8;
+    color: #555;
+}
+
+
+
+
+
+.amenities {
+    padding: 80px 0;
+    background: #F4EEE0;
+    text-align: center;
+}
+
+.section-title {
+    font-size: 36px;
+    margin-bottom: 10px;
+    color: #000000;
+}
+
+.section-subtitle {
+    color: #666;
+    margin-bottom: 50px;
+}
+
+.amenities-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+}
+
+.amenity-card {
+    background: #f9f9f9;
+    padding: 30px;
+    border-radius: 12px;
+    transition: 0.3s ease;
+}
+
+.amenity-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+}
+
+.amenity-card i {
+    font-size: 40px;
+    color: #2c7da0;
+    margin-bottom: 20px;
+}
+
+.amenity-card h3 {
+    margin-bottom: 10px;
+    font-size: 20px;
+}
+
+.amenity-card p {
+    color: #666;
+    font-size: 15px;
+}
+
+
+
+
+
+
+/* CSS for Rooms */
+
+.rooms-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* 🔥 2 per row */
+    gap: 30px;
+    padding: 40px;
+}
+
+.room-card {
+    background: #fff;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.room-card img {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+}
+
+.room-content {
+    padding: 20px;
+}
+
+.room-content h3 {
+    margin-bottom: 10px;
+    font-size: 20px;
+}
+
+.price {
+    font-weight: bold;
+    color: #0a7ea4;
+    margin: 10px 0;
+}
+
+.book-btn {
+    width: 100%;
+    padding: 12px;
+    background: #0a7ea4;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.book-btn:hover {
+    background: #066a87;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 /* ========================= */
 /* RESPONSIVE */

@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Barr Mont Le Paseo - Hotel Reservation System</title>
     <link rel="stylesheet" href="static/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
 </head>
 <body>
 
@@ -12,96 +14,76 @@
     <section class="hero">
         <div class="hero-content">
             <h1>Welcome to Paradise</h1>
-            <p>Escape to Barr Mont Le Paseo Island Resort, <br>where crystal-clear waters meet pristine beaches and luxury meets tranquility.</p>
+            <p>Barr Month Le Paseo Isla Andis Resort is a serene island escape in Ando Island, Borongan City, Eastern Samar — where crystal-clear waters, golden sunsets, and laid-back coastal charm create the perfect getaway for relaxation and adventure.</p>
             <a href="rooms.php" class="btn btn-primary">Book Now</a>
         </div>
     </section>
 
-    <section class="featured-rooms">
+    <section class="description">
         <div class="container">
-            <h2>Featured Rooms</h2>
-            <div class="rooms-grid">
-                <div class="room-card">
-                    <img src="public/images/room-deluxe.jpg" alt="Deluxe Room">
-                    <h3>Deluxe Room</h3>
-                    <p>Spacious rooms with modern amenities</p>
-                    <p class="price">$150/night</p>
-                </div>
-                <div class="room-card">
-                    <img src="public/images/room-suite.jpg" alt="Suite">
-                    <h3>Premium Suite</h3>
-                    <p>Luxury suite with private balcony</p>
-                    <p class="price">$250/night</p>
-                </div>
-                <div class="room-card">
-                    <img src="public/images/room-villa.jpg" alt="Villa">
-                    <h3>Private Villa</h3>
-                    <p>Exclusive villa with pool access</p>
-                    <p class="price">$450/night</p>
-                </div>
-                <div class="room-card">
-                    <img src="public/images/room-family.jpg" alt="Family Room">
-                    <h3>Family Room</h3>
-                    <p>Perfect for families with kids</p>
-                    <p class="price">$200/night</p>
-                </div>
+            <div class="section-header">
+                <h2>Your Island Escape Awaits</h2>
+                <p class="section-subtitle">
+                    Nestled on a pristine island in the Pacific, Barr Mont Le Paseo offers an unparalleled tropical retreat. 
+                    With overwater bungalows, private villas, and world-class amenities, every moment here is designed to create 
+                    memories that last a lifetime. Whether you seek adventure or relaxation, our island paradise has something for everyone.
+                </p>
             </div>
         </div>
     </section>
 
-    <section class="amenities-preview">
+    <section class="amenities">
         <div class="container">
-            <h2>Our Amenities</h2>
+            <h2 class="section-title">Resort Amenities</h2>
+            <p class="section-subtitle">
+                Discover our world-class facilities designed for your comfort and enjoyment
+            </p>
+
             <div class="amenities-grid">
-                <div class="amenity-item">
-                    <div class="amenity-icon">🏊</div>
-                    <h3>Swimming Pool</h3>
-                    <p>Olympic-sized heated pool</p>
+
+                <div class="amenity-card">
+                    <i class="fas fa-water"></i>
+                    <h3>Infinity Pool</h3>
+                    <p>Stunning ocean-view pools with swim-up bar</p>
                 </div>
-                <div class="amenity-item">
-                    <div class="amenity-icon">🍽️</div>
+
+                <div class="amenity-card">
+                    <i class="fas fa-utensils"></i>
                     <h3>Fine Dining</h3>
-                    <p>World-class restaurant & bar</p>
+                    <p>World-class restaurants with fresh seafood</p>
                 </div>
-                <div class="amenity-item">
-                    <div class="amenity-icon">💆</div>
-                    <h3>Spa & Wellness</h3>
-                    <p>Premium spa treatments</p>
-                </div>
-                <div class="amenity-item">
-                    <div class="amenity-icon">🏋️</div>
+
+                <div class="amenity-card">
+                    <i class="fas fa-dumbbell"></i>
                     <h3>Fitness Center</h3>
-                    <p>State-of-the-art gym</p>
+                    <p>State-of-the-art gym and wellness spa</p>
                 </div>
+
+                <div class="amenity-card">
+                    <i class="fas fa-spa"></i>
+                    <h3>Spa & Wellness</h3>
+                    <p>Rejuvenating treatments and massages</p>
+                </div>
+
+                <div class="amenity-card">
+                    <i class="fas fa-umbrella-beach"></i>
+                    <h3>Private Beach</h3>
+                    <p>Exclusive white sand beach access</p>
+                </div>
+
+                <div class="amenity-card">
+                    <i class="fas fa-person-swimming"></i>
+                    <h3>Water Sports</h3>
+                    <p>Kayaking, snorkeling, and diving</p>
+                </div>
+
             </div>
         </div>
     </section>
 
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-section">
-                    <h4>About Us</h4>
-                    <p>Barr Mont Le Paseo offers world-class hospitality and unforgettable experiences.</p>
-                </div>
-                <div class="footer-section">
-                    <h4>Quick Links</h4>
-                    <ul>
-                        <li><a href="rooms.php">Rooms</a></li>
-                        <li><a href="amenities.php">Amenities</a></li>
-                        <li><a href="contact.php">Contact</a></li>
-                    </ul>
-                </div>
-                <div class="footer-section">
-                    <h4>Contact</h4>
-                    <p>Email: info@luxuryresort.com</p>
-                    <p>Phone: +1-800-RESORT</p>
-                </div>
-            </div>
-            <div class="footer-bottom">
-                <p>&copy; 2024 Barr Mont Le Paseo. All rights reserved.</p>
-            </div>
-        </div>
-    </footer>
+
+
+
+
 </body>
 </html>
