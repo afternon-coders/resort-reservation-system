@@ -1,0 +1,129 @@
+/* Page Background */
+body {
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    background: #d8d1c2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+/* Card Container */
+.login-card {
+    background: #f4f4f4;
+    width: 420px;
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+    text-align: center;
+}
+
+/* Wave Icon */
+.wave-icon {
+    font-size: 28px;
+    color: #0d6e88;
+    margin-bottom: 15px;
+}
+
+/* Title */
+.login-card h1 {
+    margin: 10px 0;
+    font-size: 28px;
+    font-weight: 600;
+}
+
+.subtitle {
+    color: #666;
+    margin-bottom: 30px;
+}
+
+/* Form Groups */
+.form-group {
+    text-align: left;
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    font-weight: 500;
+    margin-bottom: 6px;
+}
+
+/* Inputs */
+.form-input {
+    width: 100%;
+    padding: 14px;
+    border-radius: 10px;
+    border: none;
+    background: #e6e1d8;
+    font-size: 15px;
+}
+
+.form-input:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px #0d6e88;
+}
+
+/* Password Wrapper */
+.password-wrapper {
+    position: relative;
+}
+
+.eye-icon {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    color: #777;
+}
+
+/* Forgot Password */
+.forgot {
+    float: right;
+    font-size: 14px;
+    color: #0d6e88;
+    text-decoration: none;
+}
+
+/* Button */
+.btn-login {
+    width: 100%;
+    padding: 14px;
+    background: #0d6e88;
+    border: none;
+    border-radius: 12px;
+    color: white;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: 0.3s;
+}
+
+.btn-login:hover {
+    background: #0a5c72;
+}
+
+/* Footer Text */
+.footer-text {
+    margin-top: 20px;
+    font-size: 15px;
+}
+
+.footer-text a {
+    color: #0d6e88;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+/* Demo Box */
+.demo-box {
+    margin-top: 20px;
+    background: #e6e1d8;
+    padding: 12px;
+    border-radius: 10px;
+    font-size: 14px;
+    color: #555;
+}

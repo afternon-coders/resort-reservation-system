@@ -1,28 +1,29 @@
 // Hardcoded Rooms
 const rooms = [
     {
-        name: "Ocean View Deluxe",
-        price: 4500,
-        image: "https://images.unsplash.com/photo-1566665797739-1674de7a421a",
+        name: "A Frame",
+        price: 6000,
+        image: "static/images/a_frame.jpg",
         description: "Spacious room with breathtaking ocean views and private balcony."
     },
     {
-        name: "Garden Villa",
-        price: 6500,
-        image: "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b",
-        description: "Private villa surrounded by tropical gardens and luxury amenities."
+
+        name: "Cottage",
+        price: 2000,
+        image: "static/images/cottage.jpg",
+        description: "Cozy seaside cottage with stunning ocean views and relaxing atmosphere."
     },
     {
-        name: "Premium Suite",
-        price: 8500,
-        image: "https://images.unsplash.com/photo-1590490360182-c33d57733427",
-        description: "Elegant suite with separate living area and island-inspired decor."
+        name: "Bird House",
+        price: 1500,
+        image: "static/images/birdhouse.jpg",
+        description: "Charming birdhouse cottage surrounded by trees and peaceful ocean views."
     },
     {
-        name: "Standard Room",
-        price: 3000,
-        image: "https://images.unsplash.com/photo-1551882547-ff40c63fe5fa",
-        description: "Comfortable and modern room perfect for short stays."
+        name: "Tree House",
+        price: 1500,
+        image: "static/images/treehouse.jpg",
+        description: "Rustic tree house retreat nestled among lush trees and fresh air."
     }
 ];
 
