@@ -39,6 +39,7 @@ $user = $isLoggedIn ? getCurrentUser() : null;
             <li><a href="index.php?page=rooms" class="<?php echo isset($page) && $page === 'rooms' ? 'active' : '' ?>">Rooms</a></li>
             <li><a href="index.php?page=amenities" class="<?php echo isset($page) && $page === 'amenities' ? 'active' : '' ?>">Amenities</a></li>
             <li><a href="index.php?page=gallery" class="<?php echo isset($page) && $page === 'gallery' ? 'active' : '' ?>">Gallery</a></li>
+            <li><a href="index.php?page=booknow" class="<?php echo isset($page) && $page === 'booknow' ? 'active' : '' ?>">Book Now</a></li>
             <li><a href="index.php?page=contact" class="<?php echo isset($page) && $page === 'contact' ? 'active' : '' ?>">Contact</a></li>
             
             <?php if ($isLoggedIn): ?>

@@ -27,10 +27,10 @@
             <div class="footer-col">
                 <h3>Quick Links</h3>
                 <ul>
-                    <li><a href="#">Rooms</a></li>
-                    <li><a href="#">Amenities</a></li>
-                    <li><a href="#">Gallery</a></li>
-                    <li><a href="#">Book Now</a></li>
+                    <li><a href="index.php?page=rooms">Rooms</a></li>
+                    <li><a href="index.php?page=amenities">Amenities</a></li>
+                    <li><a href="index.php?page=gallery">Gallery</a></li>
+                    <li><a href="index.php?page=booknow">Book Now</a></li>
                 </ul>
             </div>
 
