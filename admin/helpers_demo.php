@@ -38,6 +38,8 @@ try {
             $room_type = trim($_POST['room_type'] ?? '');
             $price = $_POST['price_per_night'] ?? 0;
             $status = $_POST['status'] ?? 'available';
+            $number_of_beds = isset($_POST['number_of_beds']) ? (int)$_POST['number_of_beds'] : 1;
+            $quantity = isset($_POST['quantity']) ? (int)$_POST['quantity'] : 1;
 
             if ($room_number === '' || $room_type === '') {
                 $message = 'Room number and type are required.';
@@ -46,6 +48,8 @@ try {
                     'room_number' => $room_number,
                     'room_type' => $room_type,
                     'price_per_night' => $price,
+                    'number_of_beds' => $number_of_beds,
+                    'quantity' => $quantity,
                     'status' => $status
                 ]);
                 $message = "Room created (ID: {$roomId}).";
@@ -135,9 +139,11 @@ try {
 
                 <form method="post">
                     <h3>Create Room</h3>
-                    <label>Room Number<br><input name="room_number" required></label><br>
+                    <label>Room Number<br><input name="room_number"></label><br>
                     <label>Type<br><input name="room_type" required></label><br>
                     <label>Price<br><input name="price_per_night" type="number" step="0.01" value="0.00"></label><br>
+                    <label>Number of Beds<br><input name="number_of_beds" type="number" min="1" value="1"></label><br>
+                    <label>Quantity<br><input name="quantity" type="number" min="1" value="1"></label><br>
                     <label>Status<br>
                         <select name="status">
                             <option value="available">available</option>
@@ -150,7 +156,7 @@ try {
 
                 <h3>List of Rooms</h3>
                 <table>
-                    <thead><tr><th>ID</th><th>Number</th><th>Type</th><th>Price</th><th>Status</th><th>Actions</th></tr></thead>
+                    <thead><tr><th>ID</th><th>Number</th><th>Type</th><th>Price</th><th>Beds</th><th>Quantity</th><th>Status</th><th>Actions</th></tr></thead>
                     <tbody>
                         <?php foreach ($rooms as $r): ?>
                             <tr>
@@ -158,6 +164,8 @@ try {
                                 <td><?= htmlspecialchars($r['room_number']) ?></td>
                                 <td><?= htmlspecialchars($r['room_type']) ?></td>
                                 <td><?= htmlspecialchars($r['price_per_night']) ?></td>
+                                <td><?= htmlspecialchars($r['number_of_beds'] ?? 0) ?></td>
+                                <td><?= htmlspecialchars($r['quantity'] ?? 0) ?></td>
                                 <td><?= htmlspecialchars($r['status']) ?></td>
                                 <td>
                                     <form method="post" style="display:inline">

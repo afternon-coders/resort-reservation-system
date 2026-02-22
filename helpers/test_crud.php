@@ -12,7 +12,7 @@ try {
     echo "Created guest with ID: $guestId\n";
 
     // Create a room
-    $roomId = $r->create(['room_number' => '101', 'room_type' => 'Deluxe', 'price_per_night' => '120.00', 'status' => 'available']);
+    $roomId = $r->create(['room_number' => '101', 'room_type' => 'Deluxe', 'price_per_night' => '120.00', 'number_of_beds' => 1, 'quantity' => 1, 'status' => 'available']);
     echo "Created room with ID: $roomId\n";
 
     // Fetch them back
