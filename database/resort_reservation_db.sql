@@ -30,11 +30,21 @@ CREATE TABLE guests (
 -- =========================
 -- Rooms
 -- =========================
+
+CREATE TABLE room_types (
+    room_type_id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(50) NOT NULL,
+    description TEXT
+);
+
 CREATE TABLE rooms (
     room_id INT AUTO_INCREMENT PRIMARY KEY,
     room_number VARCHAR(10) NOT NULL,
-    room_type VARCHAR(50) NOT NULL,
+    room_type INT NOT NULL,
+     FOREIGN KEY (room_type) REFERENCES room_types(room_type_id),
     price_per_night DECIMAL(10,2) NOT NULL,
+    number_of_beds INT NOT NULL DEFAULT 0,
+    quantity INT NOT NULL DEFAULT 1,
     status ENUM('available', 'occupied', 'maintenance') DEFAULT 'available'
 );
 

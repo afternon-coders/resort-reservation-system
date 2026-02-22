@@ -80,8 +80,8 @@
                 </div>
 
             </div>
-            <div class=" all-amenities-btn">
-                <a href="index.php?page=amenities" class="btn-primary">
+            <div class="all-amenities-btn-container ">
+                <a href="index.php?page=amenities" class="all-amenities-btn btn-secondary">
                     All Amenities
                 </a>
             </div>
