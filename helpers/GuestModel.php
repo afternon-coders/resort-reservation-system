@@ -9,9 +9,10 @@ class GuestModel extends BaseModel
 
     public function create(array $data)
     {
-        $sql = "INSERT INTO {$this->table} (name, email, phone) VALUES (:name, :email, :phone)";
+        $sql = "INSERT INTO {$this->table} (user_id, name, email, phone) VALUES (:user_id, :name, :email, :phone)";
         $stmt = $this->pdo->prepare($sql);
         $stmt->execute([
+            ':user_id' => $data['user_id'] ?? null,
             ':name' => $data['name'] ?? null,
             ':email' => $data['email'] ?? null,
             ':phone' => $data['phone'] ?? null,
@@ -55,6 +56,7 @@ class GuestModel extends BaseModel
         $fields = [];
         $params = [':id' => $id];
 
+        if (isset($data['user_id'])) { $fields[] = 'user_id = :user_id'; $params[':user_id'] = $data['user_id']; }
         if (isset($data['name'])) { $fields[] = 'name = :name'; $params[':name'] = $data['name']; }
         if (isset($data['email'])) { $fields[] = 'email = :email'; $params[':email'] = $data['email']; }
         if (isset($data['phone'])) { $fields[] = 'phone = :phone'; $params[':phone'] = $data['phone']; }
