@@ -68,9 +68,8 @@ try {
     $recentUsers = [];
 }
 
-@include_once __DIR__ . '/../inc/header.php';
 ?>
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -238,7 +237,5 @@ window.onload = function() {
         <p class="muted">Quick links to manage rooms.</p>
         <p><a href="index.php?page=manage_rooms">Open Manage Rooms</a></p>
     </div>
-
-    <?php @include_once __DIR__ . '/../inc/footer.php'; ?>
 </body>
 </html>
