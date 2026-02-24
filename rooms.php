@@ -13,8 +13,7 @@ $formattedRooms = array_map(function($room) {
         'price' => (int)$room['price_per_night'],
         'image' => 'static/images/' . strtolower(str_replace(' ', '_', $room['room_type'])) . '.jpg',
         'description' => 'Beautiful ' . $room['room_type'] . ' with premium amenities and stunning views.',
-        'beds' => (int)($room['number_of_beds'] ?? 0),
-        'quantity' => (int)($room['quantity'] ?? 0)
+        'beds' => (int)($room['number_of_beds'] ?? 0)
     ];
 }, $dbRooms);
 ?>
