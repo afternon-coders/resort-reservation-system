@@ -1,22 +1,40 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+
 /* Page Background */
-body {
+
+* {
     margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    
     font-family: 'Segoe UI', sans-serif;
-    background: #d8d1c2;
+    font-size: 12px;
+}
+
+body {
+    text-align: center;
+    min-height: 100vh;
     display: flex;
-    justify-content: center;
     align-items: center;
-    height: 100vh;
+    justify-content: center;
+    background: #d8d1c2;
+    padding: 20px;
+
+    font-family: 'Poppins', sans-serif;
+}
+
+.container {
+    width: 100%;
+    max-width: 480px;
 }
 
 /* Card Container */
 .login-card {
-    background: #f4f4f4;
-    width: 420px;
-    padding: 40px;
+    background: white;
     border-radius: 20px;
-    box-shadow: 0 8px 20px rgba(0,0,0,0.08);
-    text-align: center;
+    padding: 40px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.1);
 }
 
 /* Wave Icon */
@@ -31,6 +49,12 @@ body {
     margin: 10px 0;
     font-size: 28px;
     font-weight: 600;
+    color: #181818;
+}
+
+.login-card p {
+    color: #666;
+    margin-bottom: 30px;
 }
 
 .subtitle {
@@ -38,32 +62,45 @@ body {
     margin-bottom: 30px;
 }
 
+/* Logo Image */
+.logo-img {
+    width: 100px;
+    height: 100px;
+    margin-bottom: 20px;
+    border-radius: 50%;
+}
+
 /* Form Groups */
 .form-group {
     text-align: left;
-    margin-bottom: 20px;
+    margin-bottom: 8px;
 }
 
 .form-group label {
     display: block;
     font-weight: 500;
-    margin-bottom: 6px;
+    margin: 5px 0px;
+    font-size: 14px;
+    color: #303030;
 }
+
 
 /* Inputs */
 .form-input {
     width: 100%;
-    padding: 14px;
+    padding: 8px 10px;
     border-radius: 10px;
     border: none;
-    background: #e6e1d8;
-    font-size: 15px;
+    background: #efebe3;
+    font-size: 14px;
+    outline: none;
 }
 
 .form-input:focus {
     outline: none;
-    box-shadow: 0 0 0 2px #0d6e88;
+    box-shadow: 0 0 0 3px rgba(128, 193, 214);
 }
+
 
 /* Password Wrapper */
 .password-wrapper {
@@ -106,10 +143,23 @@ body {
     background: #0a5c72;
 }
 
+.form-check {
+    margin-top: 20px;
+    font-size: 15px;
+    text-align: center;
+}
+
+.form-check a {
+    color: #0d6e88;
+    text-decoration: none;
+    font-weight: 500;
+}
+
 /* Footer Text */
 .footer-text {
     margin-top: 20px;
     font-size: 15px;
+    text-align: center;
 }
 
 .footer-text a {

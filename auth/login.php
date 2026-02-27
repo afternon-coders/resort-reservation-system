@@ -47,7 +47,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <title>Login</title>
 
 <!-- Link External CSS -->
-<link rel="stylesheet" href="../static/css/login.css">
+<link rel="stylesheet" href="\admin\static\css\login.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <style>
     .error-message {
@@ -69,56 +69,57 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 </style>
 </head>
 
-<body>
+    <body>
 
-<div class="login-card">
-    
-    <div class="wave-icon">≈≈≈</div>
+    <div class="container">
 
-    <h1>Welcome</h1>
-    <p class="subtitle">Sign in to manage your reservations</p>
+        <div class="login-card">
+            <img src="\static\images\lepaseo_logo.jpg" alt="Logo" class="logo-img">
 
-    <?php if ($error): ?>
-        <div class="error-message"><?php echo htmlspecialchars($error); ?></div>
-    <?php endif; ?>
+            <h1>Welcome</h1>
+            <p class="subtitle">Sign in to manage your reservations</p>
 
-    <?php if ($success): ?>
-        <div class="success-message"><?php echo htmlspecialchars($success); ?></div>
-    <?php endif; ?>
+            <?php if ($error): ?>
+                <div class="error-message"><?php echo htmlspecialchars($error); ?></div>
+            <?php endif; ?>
 
-    <form method="POST">
-        <div class="form-group">
-            <label>Email</label>
-            <input type="email" name="email" placeholder="you@example.com" class="form-input" required>
-        </div>
+            <?php if ($success): ?>
+                <div class="success-message"><?php echo htmlspecialchars($success); ?></div>
+            <?php endif; ?>
 
-        <div class="form-group">
-            <label>
-                Password 
-                <a href="#" class="forgot">Forgot password?</a>
-            </label>
+            <form method="POST">
+                <div class="form-group">
+                    <label>Email</label>
+                    <input type="email" name="email" placeholder="you@example.com" class="form-input" required>
+                
+                    <label>
+                        Password 
+                        <a href="#" class="forgot">Forgot password?</a>
+                    </label>
 
-            <div class="password-wrapper">
-                <input type="password" name="password" placeholder="Enter your password" class="form-input" required>
-                <span class="eye-icon" onclick="togglePassword()"><i class="fa fa-eye"></i></span>
+                    <div class="password-wrapper">
+                        <input type="password" name="password" placeholder="Enter your password" class="form-input" required>
+                        <span class="eye-icon" onclick="togglePassword()"><i class="fa fa-eye"></i></span>
+                    </div>
+                    
+                </div>
+
+                <button type="submit" class="btn-login">Sign In</button>
+            </form>
+
+            <div class="footer-text">
+                Don't have an account? <a href="register.php">Create account</a>
             </div>
+
         </div>
-
-        <button type="submit" class="btn-login">Sign In</button>
-    </form>
-
-    <div class="footer-text">
-        Don't have an account? <a href="register.php">Create account</a>
     </div>
 
-</div>
-
-<script>
-function togglePassword() {
-    const input = document.querySelector('.password-wrapper input');
-    input.type = input.type === "password" ? "text" : "password";
-}
-</script>
+    <script>
+    function togglePassword() {
+        const input = document.querySelector('.password-wrapper input');
+        input.type = input.type === "password" ? "text" : "password";
+    }
+    </script>
 
 </body>
 </html>
