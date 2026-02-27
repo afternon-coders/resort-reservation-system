@@ -10,10 +10,10 @@ $types = [
 ];
 
 $cottages = [
-    ['number' => '101', 'name' => 'A Frame Deluxe', 'price' => 6000, 'max_occupancy' => 4, 'is_available' => 1, 'types' => ['A Frame']],
-    ['number' => '102', 'name' => 'Seaside Cottage', 'price' => 2000, 'max_occupancy' => 2, 'is_available' => 1, 'types' => ['Cottage']],
-    ['number' => '103', 'name' => 'Bird House Comfort', 'price' => 1500, 'max_occupancy' => 2, 'is_available' => 1, 'types' => ['Bird House']],
-    ['number' => '104', 'name' => 'Forest Tree House', 'price' => 1500, 'max_occupancy' => 2, 'is_available' => 1, 'types' => ['Tree House']],
+    ['number' => '101', 'name' => 'A Frame', 'price' => 6000, 'max_occupancy' => 4, 'is_available' => 1, 'types' => ['A Frame']],
+    ['number' => '102', 'name' => 'Cottage', 'price' => 2000, 'max_occupancy' => 2, 'is_available' => 1, 'types' => ['Cottage']],
+    ['number' => '103', 'name' => 'Bird House', 'price' => 1500, 'max_occupancy' => 2, 'is_available' => 1, 'types' => ['Bird House']],
+    ['number' => '104', 'name' => 'Tree House', 'price' => 1500, 'max_occupancy' => 2, 'is_available' => 1, 'types' => ['Tree House']],
 ];
 
 try {
