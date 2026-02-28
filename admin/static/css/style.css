@@ -1,192 +1,36 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
 
-/* RESET */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+.grid {
+    display:flex; 
+    gap:16px; 
+    flex-wrap:wrap; 
+}
+.card { 
+    background:#fff; 
+    border:1px solid #e6e6e6; 
+    padding:16px; 
+    border-radius:6px; 
+    box-shadow:0 1px 3px rgba(0,0,0,0.05); 
+}
+.card.stat { 
+    flex:1 1 200px; 
+}
+h1 { 
+    margin:0 0 12px 0; 
+}
+table {
+    width:100%; 
+    border-collapse:collapse; 
+}
+th,td { 
+    text-align:left; 
+    padding:8px; 
+    border-bottom:1px solid #f0f0f0; 
+}
+.muted { 
+    color:#666; 
+    font-size:0.95rem; 
 }
 
-body {
-    font-family: 'Segoe UI', sans-serif;
-}
-
-/* CONTAINER */
-.container {
-    max-width: 1200px;
-    margin: auto;
-    padding: 0 20px;
-}
-
-/* ========================= */
-/* NAVBAR */
-/* ========================= */
-
-.navbar {
-    position: absolute;
-    width: 100%;
-    top: 0;
-    left: 0;
-    background: rgba(255,255,255,0.95);
-    padding: 20px 0;
-    z-index: 1000;
-}
-
-.nav-container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-
-
-.logo {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-}
-
-/* Circle Image */
-.logo-img {
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    object-fit: cover;
-}
-
-/* Text container */
-.logo-text {
-    display: flex;
-    flex-direction: column;
-}
-
-/* Main title */
-.main-name {
-    font-size: 20px;
-    font-weight: bold;
-    margin: 0;
-    color: #1a3a52;
-}
-
-/* Subtitle */
-.sub-name {
-    font-size: 12px;
-    margin: 0;
-    color: #666;
-}
-
-
-
-
-
-.nav-links {
-    list-style: none;
-    display: flex;
-    gap: 30px;
-    align-items: center;
-}
-
-.nav-links a {
-    text-decoration: none;
-    color: #333;
-    font-size: 14px;
-    font-weight: 500;
-    transition: 0.3s;
-}
-
-.nav-links a:hover,
-.nav-links a.active {
-    color: #1a73e8;
-}
-
-.login-btn {
-    padding: 8px 16px;
-    border: 1px solid #ccc;
-    border-radius: 20px;
-}
-
-/* ========================= */
-/* HERO SECTION */
-/* ========================= */
-
-.hero {
-    height: 100vh;
-    background: linear-gradient(rgba(0,0,0,0.35), rgba(0,0,0,0.35)),
-                url('../images/lapaseo_bar.jpg') center/cover no-repeat;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    color: white;
-    padding: 0 20px;
-}
-
-.hero-content {
-    max-width: 800px;
-}
-
-.hero-content h1 {
-    font-size: 64px;
-    font-weight: 700;
-    margin-bottom: 20px;
-}
-
-.hero-content p {
-    font-size: 18px;
-    margin-bottom: 40px;
-    line-height: 1.6;
-    color: rgba(255,255,255,0.9);
-}
-
-/* BUTTONS */
-
-.hero-buttons {
-    display: flex;
-    justify-content: center;
-    gap: 20px;
-    flex-wrap: wrap;
-}
-
-.btn-primary {
-    padding: 14px 28px;
-    background: #1a73e8;
-    color: white;
-    border-radius: 6px;
-    text-decoration: none;
-    font-weight: 600;
-    transition: 0.3s;
-}
-
-.btn-primary:hover {
-    background: #0d5bd3;
-}
-
-.btn-outline {
-    padding: 14px 28px;
-    border: 2px solid white;
-    color: white;
-    border-radius: 6px;
-    text-decoration: none;
-    font-weight: 600;
-    transition: 0.3s;
-}
-
-.btn-outline:hover {
-    background: white;
-    color: #333;
-}
-
-/* ========================= */
-/* RESPONSIVE */
-/* ========================= */
-
-@media(max-width:768px){
-
-    .hero-content h1 {
-        font-size: 36px;
-    }
-
-    .nav-links {
-        gap: 15px;
-    }
+.main-content {
+    margin-left: 280px;
 }
