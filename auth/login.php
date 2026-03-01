@@ -31,7 +31,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $_SESSION['email'] = $user['account_email'] ?? $user['email'] ?? null;
             $_SESSION['role'] = $user['role'] ?? 'guest';
 
-            header('Location: ../index.php');
+            if ($_SESSION['role'] === 'admin') {
+                header('Location: ../admin/index.php');
+            } else {
+                header('Location: ../index.php');
+            }
+
             exit;
         } else {
             $error = 'Invalid email or password.';
@@ -74,7 +79,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <div class="container">
 
         <div class="login-card">
-            <img src="\static\images\lepaseo_logo.jpg" alt="Logo" class="logo-img">
+            <img src="\static\img\lepaseo_logo.jpg" alt="Logo" class="logo-img">
 
             <h1>Welcome</h1>
             <p class="subtitle">Sign in to manage your reservations</p>
