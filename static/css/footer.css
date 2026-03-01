@@ -56,11 +56,15 @@ body {
 }
 
 .footer-col ul li {
-    margin-bottom: 12px;
+    gap: 10px;
 }
 
 .footer-col ul li a {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
     text-decoration: none;
+    padding: 5px 10px;
     color: #cfd8dc;
     transition: 0.3s;
 }
