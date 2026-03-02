@@ -14,7 +14,8 @@ if (isset($_SESSION['user_id'])) {
 
 // Handle POST request
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $firstName = $_POST['first_name'] ?? ''; 
+    $firstName = $_POST['first_name'] ?? '';
+    $middleName = $_POST['middle_name'] ?? '';
     $lastName = $_POST['last_name'] ?? ''; 
     $email = $_POST['email'] ?? '';
     $phone = $_POST['phone'] ?? '';
@@ -42,6 +43,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $username = explode('@', $email)[0] . '_' . substr(md5($email), 0, 6);
                 $userId = $userModel->create([
                     'username' => $username,
+                    'first_name' => $firstName,
+                    'middle_name' => $middleName,
+                    'last_name' => $lastName,
                     'email' => $email,
                     'password' => $password,
                     'role' => 'guest'
@@ -59,6 +63,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 // Log in the new user
                 $_SESSION['user_id'] = $userId;
                 $_SESSION['username'] = $username;
+                $_SESSION['full_name'] = trim(implode(' ', array_filter([$firstName, $middleName, $lastName])));
                 $_SESSION['email'] = $email;
                 $_SESSION['role'] = 'guest';
 
@@ -122,6 +127,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     <div class="form-group">
                         <label for="firstName">First Name</label>
                         <input type="text" id="firstName" name="first_name" required class="form-input">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="middleName">Middle Name</label>
+                        <input type="text" id="middleName" name="middle_name" class="form-input">
                     </div>
 
                     <div class="form-group">
