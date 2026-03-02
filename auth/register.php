@@ -14,14 +14,15 @@ if (isset($_SESSION['user_id'])) {
 
 // Handle POST request
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $fullName = $_POST['fullName'] ?? '';
+    $firstName = $_POST['first_name'] ?? ''; 
+    $lastName = $_POST['last_name'] ?? ''; 
     $email = $_POST['email'] ?? '';
     $phone = $_POST['phone'] ?? '';
     $password = $_POST['password'] ?? '';
     $confirmPassword = $_POST['confirmPassword'] ?? '';
 
     // Validation
-    if (empty($fullName) || empty($email) || empty($password) || empty($confirmPassword)) {
+    if (empty($firstName) || empty($lastName) || empty($email) || empty($password) || empty($confirmPassword)) {
         $error = 'All fields are required.';
     } elseif ($password !== $confirmPassword) {
         $error = 'Passwords do not match.';
@@ -49,7 +50,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 // Create guest profile linked to user
                 $guestId = $guestModel->create([
                     'user_id' => $userId,
-                    'name' => $fullName,
+                    'first_name' => $firstName,
+                    'last_name' => $lastName,
                     'email' => $email,
                     'phone' => $phone
                 ]);
@@ -116,9 +118,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <?php endif; ?>
 
             <form method="POST">
-                <div class="form-group">
-                    <label for="fullName">Full Name</label>
-                    <input type="text" id="fullName" name="fullName" required class="form-input">
+                <div class="full-name">
+                    <div class="form-group">
+                        <label for="firstName">First Name</label>
+                        <input type="text" id="firstName" name="first_name" required class="form-input">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="lastName">Last Name</label>
+                        <input type="text" id="lastName" name="last_name" required class="form-input">
+                    </div>
                 </div>
 
                 <div class="form-group">
