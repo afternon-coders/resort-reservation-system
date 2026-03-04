@@ -87,7 +87,7 @@ window.onload = function() {
     <link rel="stylesheet" href="static/css/style.css">
 </head>
 <body>
-    <div class=""></div>
+    <div class="">
         
         <h1>Admin Dashboard</h1>
         <?php if ($error): ?>
@@ -200,6 +200,7 @@ window.onload = function() {
             <p class="muted">Quick links to manage rooms.</p>
             <p><a href="index.php?page=manage_rooms">Open Manage Rooms</a></p>
         </div>
+    </div>
 
 </body>
 </html>
