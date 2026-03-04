@@ -79,31 +79,31 @@ $user = $isLoggedIn ? getCurrentUser() : null;
                 <ul class="">
                     <li>
                         <span>
-                            <img src="/admin/static/img/dashboard.svg" alt="">
+                            <img src="/admin/static/img/amenitiesdashboard.svg" alt="">
                         </span>
                         <a href="/admin/index.php?page=dashboard">Dashboard</a>
                     </li>
                     <li>
                         <span>
-                            <img src="/admin/static/img/reservation.svg" alt="">
+                            <img src="/admin/static/img/amenitiesreservation.svg" alt="">
                         </span>
                         <a href="/admin/index.php?page=reservations">Reservations</a>
                     </li>
                     <li>
                         <span>
-                            <img src="/admin/static/img/bed.svg" alt="">
+                            <img src="/admin/static/img/amenitiesbed.svg" alt="">
                         </span>
                         <a href="/admin/index.php?page=rooms">Rooms</a>
                     </li>
                     <li>
                         <span>
-                            <img src="/admin/static/img/people.svg" alt="">
+                            <img src="/admin/static/img/amenitiespeople.svg" alt="">
                         </span>
                         <a href="/admin/index.php?page=users">Customers</a>
                     </li>
                     <li>
                         <span>
-                            <img src="/admin/static/img/analytics.svg" alt="">
+                            <img src="/admin/static/img/amenitiesanalytics.svg" alt="">
                         </span>
                         <a href="/admin/index.php?page=reports">Reports</a>
                     </li>
@@ -115,19 +115,19 @@ $user = $isLoggedIn ? getCurrentUser() : null;
                 <ul>
                     <li>
                         <span>
-                            <img src="/admin/static/img/edit_doc.svg" alt="">
+                            <img src="/admin/static/img/amenitiesedit_doc.svg" alt="">
                         </span>
                         Page Content
                     </li>
                     <li>
                         <span>
-                            <img src="/admin/static/img/image.svg" alt="">
+                            <img src="/admin/static/img/amenitiesimage.svg" alt="">
                         </span>
                         Media Library
                     </li>
                     <li>
                         <span>
-                            <img src="/admin/static/img/settings.svg" alt="">
+                            <img src="/admin/static/img/amenitiessettings.svg" alt="">
                         </span>
                         Site Settings
                     </li>
@@ -142,7 +142,7 @@ $user = $isLoggedIn ? getCurrentUser() : null;
                     </li>
                     <li>
                         <span>
-                            <img src="/admin/static/img/logout.svg" alt="">
+                            <img src="/admin/static/img/amenitieslogout.svg" alt="">
                         </span>
                         <a href="/auth/logout.php">Logout</a>
                     </li>
