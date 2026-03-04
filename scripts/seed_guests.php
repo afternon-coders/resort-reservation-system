@@ -3,12 +3,13 @@
 require_once __DIR__ . '/../helpers/DB.php';
 
 $guests = [
+    // Non-registered guests (Guest Checkout)
     ['first_name' => 'John', 'last_name' => 'Doe', 'email' => 'john.doe@example.com', 'phone_number' => '09171234567', 'address' => 'Manila, Philippines'],
     ['first_name' => 'Jane', 'last_name' => 'Smith', 'email' => 'jane.smith@example.com', 'phone_number' => '09179876543', 'address' => 'Quezon City, Philippines'],
-    ['first_name' => 'System', 'last_name' => 'Admin', 'email' => 'admin@example.com', 'phone_number' => '000', 'address' => 'Main Office'],
+    
+    // Registered guests (Users with accounts)
     ['first_name' => 'Alice', 'last_name' => 'Smith', 'email' => 'alice@example.com', 'phone_number' => '111', 'address' => 'Guest House'],
     ['first_name' => 'Robert', 'last_name' => 'Johnson', 'email' => 'bob@example.com', 'phone_number' => '222', 'address' => 'Guest House'],
-    ['first_name' => 'Hotel', 'last_name' => 'Staff', 'email' => 'staff@example.com', 'phone_number' => '333', 'address' => 'Staff Room'],
 ];
 
 try {

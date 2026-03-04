@@ -21,11 +21,15 @@ try {
             continue;
         }
 
-        // Get guest_id from Guests table by email
-        $gstmt = $pdo->prepare('SELECT guest_id FROM Guests WHERE email = :e LIMIT 1');
-        $gstmt->execute([':e' => $u['email']]);
-        $guest = $gstmt->fetch();
-        $guestId = $guest ? (int)$guest['guest_id'] : null;
+        // Logic: guest_id is ONLY for the 'guest' role. 
+        // Admin and Staff roles do not have a corresponding profile in the Guests table.
+        $guestId = null;
+        if ($u['role'] === 'guest') {
+            $gstmt = $pdo->prepare('SELECT guest_id FROM Guests WHERE email = :e LIMIT 1');
+            $gstmt->execute([':e' => $u['email']]);
+            $guest = $gstmt->fetch();
+            $guestId = $guest ? (int)$guest['guest_id'] : null;
+        }
 
         $ins = $pdo->prepare('INSERT INTO Users (guest_id, username, password_hash, account_email, role) VALUES (:gid, :u, :p, :e, :r)');
         $ins->execute([

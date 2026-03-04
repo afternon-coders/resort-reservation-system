@@ -93,7 +93,6 @@ window.onload = function() {
                 <?php
                     $fullName = trim(implode(' ', array_filter([
                         $u['first_name'],
-                        $u['middle_name'],
                         $u['last_name']
                     ])));
 
