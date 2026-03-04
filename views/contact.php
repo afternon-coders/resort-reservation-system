@@ -8,7 +8,7 @@
 </head>
 <body>
 
-    <section class="contact-header">
+    <section class="home_header">
         <div class="container">
             <h1>Contact Us</h1>
             <p>We'd love to hear from you. Get in touch with our team.</p>

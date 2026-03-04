@@ -26,7 +26,7 @@ try {
     $recentUsers = $pdo->query(
         'SELECT user_id, username, first_name, middle_name, last_name, account_email, role 
         FROM Users 
-        WHERE role = "admin"
+        WHERE role = "guest"
         ORDER BY user_id DESC 
         LIMIT 8'
     )->fetchAll();

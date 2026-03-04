@@ -503,11 +503,9 @@ body {
 
 
 
-/* ROOMS */
-
-
-.room_header {
-    margin-top: 5vh;
+/* Header */
+.home_header {
+    margin-top: 90px;
     padding: 25px;
     background: #F4EEE0;
     
@@ -517,6 +515,8 @@ body {
     justify-content: center;  
     text-align: center;
 }
+
+/* ROOMS */
 
 .section-title-rooms {
     font-size: 36px;
@@ -694,7 +694,7 @@ body {
 .booknow-container {
     max-width: 1200px;
     margin: auto;
-    margin-top: 80px;
+    margin-top: 120px;
     margin-bottom: 80px;
     display: grid;
     grid-template-columns: 2fr 1fr;
@@ -953,23 +953,14 @@ body {
 /* ======================== */
 
 
-.contact-header {
-    background-color: #fff1cc;
-    margin: 20px auto;
-    padding: 50px;
-    display: flex;
-    text-align: center;
-    gap: 20px;
-}
-
-.contact-header h1 {
+.home_header h1 {
     color: #182529;
     font-weight: bold;
     font-size: 60px;
     line-height: 1.6; 
 }
 
-.contact-header p {
+.home_header p {
     color: #969696;
 }
 

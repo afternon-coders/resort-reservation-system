@@ -13,7 +13,7 @@
 </head>
 <body>
 
-    <section class="room_header">
+    <section class="home_header">
         <div class="container">
             <h2 class="section-title-rooms">Resort Amenities</h2>
             <p class="section-subtitle">Discover our world-class facilities designed for your comfort and enjoyment</p>

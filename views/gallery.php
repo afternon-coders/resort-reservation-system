@@ -9,7 +9,7 @@
 </head>
 <body>
 
-    <section class="room_header">
+    <section class="home_header">
         <div class="container">
 
             <h2 class="section-title-rooms">Photo Gallery</h2>
