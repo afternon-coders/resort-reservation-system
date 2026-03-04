@@ -74,18 +74,20 @@ $user = $isLoggedIn ? getCurrentUser() : null;
                 </div>
             </div>
 
+            <hr style="height: 0.5px; ">
+
             <div class="sidebar-section">
                 <p class="admin-section-title">MANAGEMENT</p>
                 <ul class="">
                     <li>
                         <span>
-                            <img src="/admin/static/img/adminpanel_icons/dashboard.svg" alt="">
+                            <img class="icon" src="/admin/static/img/adminpanel_icons/dashboard.svg" alt="" >
                         </span>
                         <a href="/admin/index.php?page=dashboard">Dashboard</a>
                     </li>
                     <li>
                         <span>
-                            <img src="/admin/static/img/adminpanel_icons/reservation.svg" alt="">
+                            <img class="icon" src="/admin/static/img/adminpanel_icons/reservation.svg" alt="">
                         </span>
                         <a href="/admin/reservations.php?page=reservations">Reservations</a>
                     </li>

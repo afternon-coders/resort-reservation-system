@@ -104,30 +104,45 @@ window.onload = function() {
                     <?php foreach ($recentReservations as $r): ?>
                         <tr>
                             <td><?php echo htmlspecialchars($r['reservation_id']); ?></td>
-                            <td><?php echo htmlspecialchars($r['guest_name'] ?? '—'); ?></td>
+                            <td>
+                                <?php echo htmlspecialchars($r['guest_name'] ?? '—'); ?>
+                                <?php echo htmlspecialchars($r['contact_email'] ?? '—'); ?>
+                            </td>
                             <td><?php echo htmlspecialchars($r['cottage_number'] ?? '—'); ?></td>
                             <td><?php echo htmlspecialchars($r['check_in_date']); ?></td>
                             <td><?php echo htmlspecialchars($r['check_out_date']); ?></td>
-                            <td><?php echo htmlspecialchars($r['status']); ?></td>
                             <td>
-                                <form method="post" style="display:inline-block;margin-right:6px;">
-                                    <input type="hidden" name="action" value="update_reservation_status">
-                                    <input type="hidden" name="reservation_id" value="<?php echo (int)$r['reservation_id']; ?>">
-                                    <select name="status">
-                                        <option value="Pending" <?php echo strtolower($r['status'])==='pending' ? 'selected' : '' ?>>Pending</option>
-                                        <option value="Confirmed" <?php echo strtolower($r['status'])==='confirmed' ? 'selected' : '' ?>>Confirmed</option>
-                                        <option value="Checked-In" <?php echo strtolower($r['status'])==='checked-in' || strtolower($r['status'])==='checked_in' ? 'selected' : '' ?>>Checked-In</option>
-                                        <option value="Checked-Out" <?php echo strtolower($r['status'])==='checked-out' || strtolower($r['status'])==='checked_out' ? 'selected' : '' ?>>Checked-Out</option>
-                                        <option value="Cancelled" <?php echo strtolower($r['status'])==='cancelled' ? 'selected' : '' ?>>Cancelled</option>
-                                    </select>
-                                    <button type="submit">Update</button>
-                                </form>
+                                <div class="badge">
+                                    <?php echo htmlspecialchars($r['status']); ?>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="action-btn-container">
+                                    <form method="post" >
+                                        <div class="action-btn">
+                                            <input type="hidden" name="action" value="update_reservation_status">
+                                            <input type="hidden" name="reservation_id" value="<?php echo (int)$r['reservation_id']; ?>">
+                                            <select name="status" class="badge">
+                                                <option class="pending" value="Pending" <?php echo strtolower($r['status'])==='pending' ? 'selected' : '' ?>>Pending</option>
+                                                <option class="confirmed" value="Confirmed" <?php echo strtolower($r['status'])==='confirmed' ? 'selected' : '' ?>>Confirmed</option>
+                                                <option class="" value="Checked-In" <?php echo strtolower($r['status'])==='checked-in' || strtolower($r['status'])==='checked_in' ? 'selected' : '' ?>>Checked-In</option>
+                                                <option value="Checked-Out" <?php echo strtolower($r['status'])==='checked-out' || strtolower($r['status'])==='checked_out' ? 'selected' : '' ?>>Checked-Out</option>
+                                                <option class="cancelled" value="Cancelled" <?php echo strtolower($r['status'])==='cancelled' ? 'selected' : '' ?>>Cancelled</option>
+                                            </select>
+                                            <button class="refresh-btn" type="submit">
+                                                <img src="/admin/static/img//adminpanel_icons/refresh.svg" alt="">
+                                            </button>
+                                        </div>
+                                    </form>
 
-                                <form method="post" style="display:inline-block;" onsubmit="return confirm('Delete reservation?');">
-                                    <input type="hidden" name="action" value="delete_reservation">
-                                    <input type="hidden" name="reservation_id" value="<?php echo (int)$r['reservation_id']; ?>">
-                                    <button type="submit">Delete</button>
-                                </form>
+                                    <form method="post"  onsubmit="return confirm('Delete reservation?');">
+                                        <input type="hidden" name="action" value="delete_reservation">
+                                        <input type="hidden" name="reservation_id" value="<?php echo (int)$r['reservation_id']; ?>">
+                                        <button class="delete-btn" type="submit">
+                                            <img src="/admin/static/img/adminpanel_icons/delete.svg" alt="">
+                                        </button>
+                                    </form>
+                                </div> 
                             </td>
                         </tr>
                     <?php endforeach; ?>
