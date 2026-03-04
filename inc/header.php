@@ -87,25 +87,25 @@ $user = $isLoggedIn ? getCurrentUser() : null;
                         <span>
                             <img src="/admin/static/img/adminpanel_icons/reservation.svg" alt="">
                         </span>
-                        <a href="admin/reservations.php?page=reservations">Reservations</a>
+                        <a href="/admin/reservations.php?page=reservations">Reservations</a>
                     </li>
                     <li>
                         <span>
                             <img src="/admin/static/img/adminpanel_icons/bed.svg" alt="">
                         </span>
-                        <a href="/admin/index.php?page=rooms">Rooms</a>
+                        <a href="/admin/rooms.php?page=rooms">Rooms</a>
                     </li>
                     <li>
                         <span>
                             <img src="/admin/static/img/adminpanel_icons/people.svg" alt="">
                         </span>
-                        <a href="/admin/index.php?page=users">Customers</a>
+                        <a href="/admin/customers.php?page=customers">Customers</a>
                     </li>
                     <li>
                         <span>
                             <img src="/admin/static/img/adminpanel_icons/analytics.svg" alt="">
                         </span>
-                        <a href="/admin/index.php?page=reports">Reports</a>
+                        <a href="/admin/reports.php?page=reports">Reports</a>
                     </li>
                 </ul>
             </div>

@@ -40,8 +40,18 @@ try {
             $message = 'Cottage availability updated.';
         }
     }
-    
-    // Recent reservations
+
+    // Stats
+    $roomsTotal = (int)$pdo->query('SELECT COUNT(*) FROM Cottages')->fetchColumn();
+    $roomsAvailable = (int)$pdo->query('SELECT COUNT(*) FROM Cottages WHERE is_available = 1')->fetchColumn();
+
+    $reservationsTotal = (int)$pdo->query('SELECT COUNT(*) FROM Reservations')->fetchColumn();
+    $reservationsPending = (int)$pdo->query("SELECT COUNT(*) FROM Reservations WHERE LOWER(status) = 'pending'")->fetchColumn();
+
+    $usersTotal = (int)$pdo->query('SELECT COUNT(*) FROM Users')->fetchColumn();
+
+    $paymentsTotal = $pdo->query('SELECT IFNULL(SUM(amount_paid),0) FROM Payments')->fetchColumn();
+
     $recentReservations = $pdo->query(
         "SELECT r.reservation_id, r.check_in_date, r.check_out_date, r.status, CONCAT(g.first_name, ' ', g.last_name) AS guest_name, c.cottage_number
          FROM Reservations r
@@ -87,42 +97,15 @@ window.onload = function() {
     <link rel="stylesheet" href="static/css/style.css">
 </head>
 <body>
-    <div class=""></div>
+    <div class="">
         
-        <h1>Admin Dashboard</h1>
+        <h1>Reservations</h1>
         <?php if ($error): ?>
             <div style="padding:12px;background:#fdecea;border:1px solid #f5c2c2;color:#6b0b0b;border-radius:4px;margin-bottom:12px;">Error: <?php echo htmlspecialchars($error); ?></div>
         <?php endif; ?>
 
-        <div class="grid">
-            <div class="card-stat">
-                <h2><?php echo $roomsTotal; ?></h2>
-                <div class="muted">Total Cottages</div>
-            </div>
-            <div class="card-stat">
-                <h2><?php echo $roomsAvailable; ?></h2>
-                <div class="muted">Available Cottages</div>
-            </div>
-            <div class="card-stat">
-                <h2><?php echo $reservationsTotal; ?></h2>
-                <div class="muted">Total Reservations</div>
-            </div>
-            <div class="card-stat">
-                <h2><?php echo $reservationsPending; ?></h2>
-                <div class="muted">Pending Reservations</div>
-            </div>
-            <div class="card-stat">
-                <h2><?php echo $usersTotal; ?></h2>
-                <div class="muted">Registered Users</div>
-            </div>
-            <div class="card-stat">
-                <h2>&#8369; <?php echo number_format((float)$paymentsTotal,2); ?></h2>
-                <div class="muted">Total Payments</div>
-            </div>
-        </div>
-
         <div style="margin-top:20px;" class="card">
-            <h3>Recent Reservations</h3>
+            <h3>All Reservations</h3>
             <?php if (empty($recentReservations)): ?>
                 <div class="muted">No recent reservations.</div>
             <?php else: ?>
@@ -166,40 +149,7 @@ window.onload = function() {
             <?php endif; ?>
         </div>
 
-        <div style="margin-top:20px;" class="card">
-            <h3>Recent Users</h3>
-            <?php if (empty($recentUsers)): ?>
-                <div class="muted">No users found.</div>
-            <?php else: ?>
-                <table>
-                    <thead><tr><th>ID</th><th>Username</th><th>Full Name</th><th>Email</th><th>Role</th><th>Actions</th></tr></thead>
-                    <tbody>
-                    <?php foreach ($recentUsers as $u): ?>
-                        <tr>
-                            <td><?php echo (int)$u['user_id']; ?></td>
-                            <td><?php echo htmlspecialchars($u['username']); ?></td>
-                            <td><?php echo htmlspecialchars(trim(implode(' ', array_filter([$u['first_name'], $u['middle_name'], $u['last_name']])))); ?></td>
-                            <td><?php echo htmlspecialchars($u['account_email'] ?? $u['email'] ?? ''); ?></td>
-                            <td><?php echo htmlspecialchars($u['role'] ?? 'guest'); ?></td>
-                            <td>
-                                <form method="post" style="display:inline-block;" onsubmit="return confirm('Delete user?');">
-                                    <input type="hidden" name="action" value="delete_user">
-                                    <input type="hidden" name="user_id" value="<?php echo (int)$u['user_id']; ?>">
-                                    <button type="submit">Delete</button>
-                                </form>
-                            </td>
-                        </tr>
-                    <?php endforeach; ?>
-                    </tbody>
-                </table>
-            <?php endif; ?>
-        </div>
-
-        <div style="margin-top:20px;" class="card">
-            <h3>Rooms</h3>
-            <p class="muted">Quick links to manage rooms.</p>
-            <p><a href="index.php?page=manage_rooms">Open Manage Rooms</a></p>
-        </div>
+    </div>
 
 </body>
 </html>
