@@ -79,31 +79,31 @@ $user = $isLoggedIn ? getCurrentUser() : null;
                 <ul class="">
                     <li>
                         <span>
-                            <img src="/admin/static/img/amenitiesdashboard.svg" alt="">
+                            <img src="/admin/static/img/adminpanel_icons/dashboard.svg" alt="">
                         </span>
                         <a href="/admin/index.php?page=dashboard">Dashboard</a>
                     </li>
                     <li>
                         <span>
-                            <img src="/admin/static/img/amenitiesreservation.svg" alt="">
+                            <img src="/admin/static/img/adminpanel_icons/reservation.svg" alt="">
                         </span>
-                        <a href="/admin/index.php?page=reservations">Reservations</a>
+                        <a href="admin/reservations.php?page=reservations">Reservations</a>
                     </li>
                     <li>
                         <span>
-                            <img src="/admin/static/img/amenitiesbed.svg" alt="">
+                            <img src="/admin/static/img/adminpanel_icons/bed.svg" alt="">
                         </span>
                         <a href="/admin/index.php?page=rooms">Rooms</a>
                     </li>
                     <li>
                         <span>
-                            <img src="/admin/static/img/amenitiespeople.svg" alt="">
+                            <img src="/admin/static/img/adminpanel_icons/people.svg" alt="">
                         </span>
                         <a href="/admin/index.php?page=users">Customers</a>
                     </li>
                     <li>
                         <span>
-                            <img src="/admin/static/img/amenitiesanalytics.svg" alt="">
+                            <img src="/admin/static/img/adminpanel_icons/analytics.svg" alt="">
                         </span>
                         <a href="/admin/index.php?page=reports">Reports</a>
                     </li>
@@ -115,19 +115,19 @@ $user = $isLoggedIn ? getCurrentUser() : null;
                 <ul>
                     <li>
                         <span>
-                            <img src="/admin/static/img/amenitiesedit_doc.svg" alt="">
+                            <img src="/admin/static/img/adminpanel_icons/edit_doc.svg" alt="">
                         </span>
                         Page Content
                     </li>
                     <li>
                         <span>
-                            <img src="/admin/static/img/amenitiesimage.svg" alt="">
+                            <img src="/admin/static/img/adminpanel_icons/image.svg" alt="">
                         </span>
                         Media Library
                     </li>
                     <li>
                         <span>
-                            <img src="/admin/static/img/amenitiessettings.svg" alt="">
+                            <img src="/admin/static/img/adminpanel_icons/settings.svg" alt="">
                         </span>
                         Site Settings
                     </li>
@@ -142,7 +142,7 @@ $user = $isLoggedIn ? getCurrentUser() : null;
                     </li>
                     <li>
                         <span>
-                            <img src="/admin/static/img/amenitieslogout.svg" alt="">
+                            <img src="/admin/static/img/adminpanel_icons/logout.svg" alt="">
                         </span>
                         <a href="/auth/logout.php">Logout</a>
                     </li>
