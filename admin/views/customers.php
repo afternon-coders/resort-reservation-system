@@ -110,9 +110,9 @@ window.onload = function() {
                             <img src="/static/img/icons/mail.svg" class="icon" alt="email icon">
                             <span><?php echo htmlspecialchars($u['account_email'] ?? ''); ?></span>
                         </div>
-                        <div>👤 <?php echo htmlspecialchars($u['username']); ?></div>
-                        <div>👤 <?php echo htmlspecialchars($u['username']); ?></div>
-                        <div>🏷 Role: <?php echo htmlspecialchars($u['role']); ?></div>
+
+                        
+                        </div>
                     </div>
                 </div>
             <?php endforeach; ?>
