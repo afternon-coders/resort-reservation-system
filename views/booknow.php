@@ -15,7 +15,7 @@ $allRooms = $roomModel->getAll(['status' => 'available']);
 $firstName = '';
 $lastName = '';
 $email = '';
-$phone = '';
+$phone_number = '';
 $msg = '';
 $msgType = '';
 
@@ -31,7 +31,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['
     $fName = $_POST['first_name'] ?? '';
     $lName = $_POST['last_name'] ?? '';
     $contactEmail = $_POST['email'] ?? '';
-    $phoneNumber = $_POST['phone_number'] ?? '';
+    $phone_number = $_POST['phone_number'] ?? '';
     $totalAmount = $_POST['total_amount'] ?? 0;
     $specialRequests = $_POST['special_requests'] ?? '';
 
@@ -56,7 +56,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['
                     'first_name' => $fName,
                     'last_name' => $lName,
                     'email' => $contactEmail,
-                    'phone' => $phoneNumber,
+                    'phone_number' => $phone_number,
                     'address' => '' // Can add field if needed
                 ]);
             }
@@ -94,8 +94,9 @@ if (isLoggedIn()) {
     if ($user) {
         $firstName = $user['first_name'] ?? '';
         $lastName = $user['last_name'] ?? '';
+
         $email = $user['email'] ?? $user['account_email'] ?? '';
-        $phone = $user['phone_number'] ?? '';
+        $phone_number = $user['phone_number'] ?? '';
     }
 }
 ?>
@@ -257,7 +258,7 @@ if (isLoggedIn()) {
                     </div>
                     <div>
                         <label class="booknow-label">Phone Number</label>
-                        <input type="tel" name="phone_number" class="booknow-input" value="<?php echo htmlspecialchars($phone); ?>" placeholder="Enter phone number">
+                        <input type="tel" name="phone_number" class="booknow-input" value="<?php echo htmlspecialchars($phone_number); ?>" placeholder="Enter phone number">
                     </div>
                 </div>
 
