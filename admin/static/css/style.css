@@ -50,9 +50,10 @@ header {
     width: 100%;
     background:#ffffff; 
     border: 1px solid #F1EEE7;
-    padding: 16px; 
+    padding: 16px 20px; 
     border-radius: 14px; 
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+
 }
 
 .card-stat { 
@@ -109,8 +110,12 @@ td:last-child {
     width: 20%;
 }
 
+th:nth-child(2) {
+    width: 25%;
+}
+
 th:nth-last-child(2) {
-    width: 20%;
+    width: 10%;
 }
 
 td {
@@ -120,6 +125,39 @@ td {
 .muted { 
     color:#666; 
     font-size:0.95rem; 
+}
+
+/* Cottages Tables */
+.cottages-table table {
+    width: 100%;
+    table-layout: fixed; 
+    font-size: 11px;
+}
+
+.cottages-table thead {
+    color: #616161;
+}
+
+.cottages-table tbody {
+    color: #303030;
+}
+
+.cottages-table th:nth-child(2) {
+    width: 13%;
+}
+
+.cottages-table th { 
+    text-align:left; 
+    padding:8px; 
+    border-bottom:1px solid #f0f0f0; 
+}
+
+.cottages-table th:last-child {
+    width: 13% !important;
+}
+
+.cottages-table th:nth-last-child(2) {
+    width: 20% !important;
 }
 
 /* Action container */
@@ -234,6 +272,14 @@ td {
     width: 100%;
 }
 
+.edit-cottage-label {
+    display: block;
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: #475569;
+    margin-bottom: 8px;
+    margin-left: 1px;
+}
 
 
 

@@ -119,7 +119,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <?php endif; ?>
 
             <div class="card">
-                <table>
+                <table class="cottages-table">
                     <thead>
                         <tr>
                             <th>ID</th>
@@ -174,20 +174,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <div class="div5">
     
             <div class="modal-wrapper">
-
                 <div class="card">
+                    <h3 style="margin-bottom: 0px;">Edit Room</h1>
+                    <p style="font-size: 11px; margin-bottom: 20px;">Update room information</p>
                     <?php if ($error): ?>
                         <div class="alert alert-danger" style="color: red; margin-bottom: 10px;"><?php echo htmlspecialchars($error); ?></div>
                     <?php endif; ?>
 
                     <form method="post">
                         <div class="form-group">
-                            <label class="booknow-label">Cottage Number *</label>
+                            <label class="edit-cottage-label">Cottage Number *</label>
                             <input type="text" name="cottage_number" class="booknow-input" required>
                         </div>
 
                         <div class="form-group">
-                            <label class="booknow-label">Cottage Type *</label>
+                            <label class="edit-cottage-label">Cottage Type *</label>
                             <select name="type_id" class="booknow-select" required>
                                 <?php foreach ($types as $t): ?>
                                     <option value="<?php echo $t['type_id']; ?>"><?php echo htmlspecialchars($t['name']); ?></option>
@@ -196,17 +197,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         </div>
 
                         <div class="form-group" style="margin-top:15px;">
-                            <label class="booknow-label">Base Price (₱)</label>
+                            <label class="edit-cottage-label">Base Price (₱)</label>
                             <input type="number" name="base_price" step="0.01" class="booknow-input" value="0.00">
                         </div>
 
                         <div class="form-group" style="margin-top:15px;">
-                            <label class="booknow-label">Max Occupancy</label>
+                            <label class="edit-cottage-label">Max Occupancy</label>
                             <input type="number" name="max_occupancy" class="booknow-input" value="2">
                         </div>
 
                         <div class="form-group" style="margin-top:15px;">
-                            <label class="booknow-label">Status</label>
+                            <label class="edit-cottage-label">Status</label>
                             <select name="status" class="booknow-select">
                                 <option value="Available">Available</option>
                                 <option value="Occupied">Occupied</option>
@@ -215,7 +216,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         </div>
 
                         <div class="form-group" style="margin-top:15px;">
-                            <label class="booknow-label">Description</label>
+                            <label class="edit-cottage-label">Description</label>
                             <textarea name="description" class="booknow-textarea"></textarea>
                         </div>
 
