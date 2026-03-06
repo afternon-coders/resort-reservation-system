@@ -39,6 +39,7 @@ try {
         }
     }
     
+    
     // Calculate Stats
     $roomsTotal = $pdo->query("SELECT COUNT(*) FROM Cottages")->fetchColumn();
     $roomsAvailable = $pdo->query("SELECT COUNT(*) FROM Cottages WHERE status = 'Available'")->fetchColumn();
@@ -46,6 +47,14 @@ try {
     $reservationsPending = $pdo->query("SELECT COUNT(*) FROM Reservations WHERE status = 'Pending'")->fetchColumn();
     $usersTotal = $pdo->query("SELECT COUNT(*) FROM Users")->fetchColumn();
     $paymentsTotal = $pdo->query("SELECT SUM(amount_paid) FROM Payments")->fetchColumn() ?: 0.0;
+
+    // Get current month revenue
+    $monthlyRevenue = $pdo->query(
+        "SELECT SUM(amount_paid) AS revenue
+        FROM Payments
+        WHERE MONTH(payment_date) = MONTH(CURRENT_DATE())
+        AND YEAR(payment_date) = YEAR(CURRENT_DATE())"
+    )->fetch();
 
     // Recent reservations - Using GROUP_CONCAT for multiple cottages
     $recentReservations = $pdo->query(
@@ -104,36 +113,41 @@ window.onload = function() {
 </head>
 <body>
     <div class="">
-        
-        <h1>Admin Dashboard</h1>
+        <div class="admin-header">
+            <h1>Admin Dashboard</h1>
+        </div>
         <?php if ($error): ?>
             <div style="padding:12px;background:#fdecea;border:1px solid #f5c2c2;color:#6b0b0b;border-radius:4px;margin-bottom:12px;">Error: <?php echo htmlspecialchars($error); ?></div>
         <?php endif; ?>
 
         <div class="grid">
             <div class="card-stat">
-                <h2><?php echo $roomsTotal; ?></h2>
-                <div class="muted">Total Cottages</div>
-            </div>
-            <div class="card-stat">
-                <h2><?php echo $roomsAvailable; ?></h2>
-                <div class="muted">Available Cottages</div>
-            </div>
-            <div class="card-stat">
                 <h2><?php echo $reservationsTotal; ?></h2>
-                <div class="muted">Total Reservations</div>
+                <div class="card-stat-content">
+                    <div class="muted">Total Reservations</div>
+                    <img src="static/img/adminpanel_icons/reservation.svg" alt="">
+                </div>
             </div>
             <div class="card-stat">
-                <h2><?php echo $reservationsPending; ?></h2>
-                <div class="muted">Pending Reservations</div>
+                    <h2><?php echo ($roomsTotal-$reservationsTotal) . " / " . ($roomsAvailable); ?></h2>
+                <div class="card-stat-content">
+                    <div class="muted">Total Cottages</div>
+                    <img src="static/img/adminpanel_icons/bed.svg" alt="">
+                </div>
             </div>
             <div class="card-stat">
-                <h2><?php echo $usersTotal; ?></h2>
-                <div class="muted">Registered Users</div>
+                    <h2><?php echo $usersTotal; ?></h2>
+                <div class="card-stat-content">
+                    <div class="muted">Total Guests</div>
+                    <img src="static/img/adminpanel_icons/people.svg" alt="">
+                </div>
             </div>
             <div class="card-stat">
-                <h2>&#8369; <?php echo number_format((float)$paymentsTotal,2); ?></h2>
-                <div class="muted">Total Payments</div>
+                    <h2>&#8369; <?php echo $monthlyRevenue['revenue']; ?></h2>
+                <div class="card-stat-content">
+                    <div class="muted">Monthly Revenue</div>
+                    <img src="static/img/adminpanel_icons/dollar.svg" alt="">
+                </div>
             </div>
         </div>
 
@@ -189,14 +203,6 @@ window.onload = function() {
                 </table>
             <?php endif; ?>
         </div>
-
-
-        <div style="margin-top:20px;" class="card">
-            <h3>Rooms</h3>
-            <p class="muted">Quick links to manage rooms.</p>
-            <p><a href="index.php?page=manage_rooms">Open Manage Rooms</a></p>
-        </div>
-    </div>
 
 </body>
 </html>

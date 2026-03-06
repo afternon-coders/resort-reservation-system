@@ -70,14 +70,16 @@ window.onload = function() {
 <body>
 
 
-    <div class="page-header">
+    <div class="admin-header">
         <h1>Customers</h1>
         <p>View and manage customer information</p>
     </div>
-
-    <div class="search-wrapper">
+    <div class="search-section">
+        <div class="search-wrapper">
         <input type="text" placeholder="Search customers..." class="search-input">
     </div>
+    </div>
+    
 
     <?php if ($error): ?>
         <div class="error-box">
