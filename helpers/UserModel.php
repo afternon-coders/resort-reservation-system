@@ -24,7 +24,7 @@ class UserModel extends BaseModel
 
     public function getById(int $id)
     {
-        $sql = "SELECT u.*, g.first_name, g.last_name, g.email as guest_email 
+        $sql = "SELECT u.*, g.first_name, g.last_name, g.email as guest_email, g.phone_number, g.address 
                 FROM {$this->table} u 
                 LEFT JOIN Guests g ON u.guest_id = g.guest_id 
                 WHERE u.{$this->primaryKey} = :id LIMIT 1";
@@ -35,7 +35,7 @@ class UserModel extends BaseModel
 
     public function getByUsername(string $username)
     {
-        $sql = "SELECT u.*, g.first_name, g.last_name, g.email as guest_email 
+        $sql = "SELECT u.*, g.first_name, g.last_name, g.email as guest_email, g.phone_number, g.address 
                 FROM {$this->table} u 
                 LEFT JOIN Guests g ON u.guest_id = g.guest_id 
                 WHERE u.username = :username LIMIT 1";
@@ -46,7 +46,7 @@ class UserModel extends BaseModel
 
     public function getByEmail(string $email)
     {
-        $sql = "SELECT u.*, g.first_name, g.last_name, g.email as guest_email 
+        $sql = "SELECT u.*, g.first_name, g.last_name, g.email as guest_email, g.phone_number, g.address 
                 FROM {$this->table} u 
                 LEFT JOIN Guests g ON u.guest_id = g.guest_id 
                 WHERE u.account_email = :email LIMIT 1";

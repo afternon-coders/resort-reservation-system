@@ -50,11 +50,11 @@ $user = $isLoggedIn ? getCurrentUser() : null;
                     <!-- Login / Logout Section -->
                     <!-- I put 2 of this kind of condition. I have no other idea HAHAHHA -->
                     <?php if ($isLoggedIn): ?>
-                        <li class="user-welcome">
+                        <li class="user-welcome logout-btn">
                             <div class="profile-dropdown">
                                 <div class="profile-toggle" onclick="toggleDropdown()">
                                     <span class="profile-name">
-                                        <?php echo htmlspecialchars($user['username'] ?? 'User'); ?>
+                                        <?php echo htmlspecialchars($user['first_name'] ?: $user['username'] ?: 'User'); ?>
                                     </span>
                                     <span class="arrow">▼</span>
                                 </div>
@@ -67,9 +67,9 @@ $user = $isLoggedIn ? getCurrentUser() : null;
                                 </div>
                             </div>
                         </li>
-                        <li>
-                            <a class="logout-btn"  href="/auth/logout.php">Logout</a>
-                        </li>
+                        <!-- <li>
+                            <a  href="/auth/logout.php">Logout</a>
+                        </li> -->
                     <?php else: ?>
                         <li><a href="/auth/login.php">Login</a></li>
                     <?php endif; ?>
@@ -156,10 +156,10 @@ $user = $isLoggedIn ? getCurrentUser() : null;
                 <!-- Login / Logout Section -->
                 <?php if ($isLoggedIn): ?>
                     <li class="user-welcome">
-                        <span>Welcome,<br> <?php echo htmlspecialchars($user['username'] ?? 'User'); ?></span>
+                        <span>Welcome,<br> <?php echo htmlspecialchars($user['first_name'] ?: 'User'); ?></span>
                     </li>
                     <li>
-                        <span>
+                        <span>  
                             <img src="/admin/static/img/adminpanel_icons/logout.svg" alt="">
                         </span>
                         <a href="/auth/logout.php">Logout</a>
