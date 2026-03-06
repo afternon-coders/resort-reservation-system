@@ -50,7 +50,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <input type="text" name="cottage_number" class="booknow-input" required>
         </div>
 
-        <div class="form-group" style="margin-top:15px;">
+        <div class="form-group">
             <label class="booknow-label">Cottage Type *</label>
             <select name="type_id" class="booknow-select" required>
                 <?php foreach ($types as $t): ?>

@@ -794,7 +794,8 @@ body {
     gap: 12px;
     font-size: 1.25rem;
     font-weight: 700;
-    margin-bottom: 25px;
+    margin-top: 25px;
+    margin-bottom: 15px;
     color: #0f172a;
 }
 
@@ -834,6 +835,13 @@ body {
 }
 
 /* Form grids */
+
+#reservationForm input,
+#reservationForm select,
+#reservationForm textarea{
+    background: #efebe3;
+}
+
 .booknow-grid-3 {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));

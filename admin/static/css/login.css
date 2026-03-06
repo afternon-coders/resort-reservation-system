@@ -73,6 +73,7 @@ body {
 .form-group {
     text-align: left;
     margin-bottom: 8px;
+    margin-top:15px;
 }
 
 .form-group label {
