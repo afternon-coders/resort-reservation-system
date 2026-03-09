@@ -1,6 +1,7 @@
 <?php
 require_once '../auth/auth_functions.php';
 require_once '../helpers/DB.php';
+require_once '../inc/csrf.php';
 
 requireLogin();
 requireAdmin();
@@ -12,12 +13,18 @@ try {
 
     // Handle admin actions
     if ($_SERVER['REQUEST_METHOD'] === 'POST' && !empty($_POST['action'])) {
+        csrf_verify_or_die();
         $action = $_POST['action'];
 
         if ($action === 'update_reservation_status' && !empty($_POST['reservation_id']) && isset($_POST['status'])) {
-            $stmt = $pdo->prepare('UPDATE Reservations SET status = :s WHERE reservation_id = :id');
-            $stmt->execute([':s' => $_POST['status'], ':id' => (int)$_POST['reservation_id']]);
-            $message = 'Reservation status updated.';
+            $allowedStatuses = ['Pending', 'Confirmed', 'Checked-In', 'Checked-Out', 'Cancelled'];
+            if (!in_array($_POST['status'], $allowedStatuses)) {
+                $message = 'Invalid status value.';
+            } else {
+                $stmt = $pdo->prepare('UPDATE Reservations SET status = :s WHERE reservation_id = :id');
+                $stmt->execute([':s' => $_POST['status'], ':id' => (int)$_POST['reservation_id']]);
+                $message = 'Reservation status updated.';
+            }
         }
 
         if ($action === 'delete_reservation' && !empty($_POST['reservation_id'])) {
@@ -33,9 +40,14 @@ try {
         }
 
         if ($action === 'update_room_status' && !empty($_POST['room_id']) && isset($_POST['status'])) {
-            $stmt = $pdo->prepare('UPDATE Cottages SET status = :s WHERE cottage_id = :id');
-            $stmt->execute([':s' => $_POST['status'], ':id' => (int)$_POST['room_id']]);
-            $message = 'Cottage status updated.';
+            $allowedRoomStatuses = ['Available', 'Occupied', 'Maintenance'];
+            if (!in_array($_POST['status'], $allowedRoomStatuses)) {
+                $message = 'Invalid room status value.';
+            } else {
+                $stmt = $pdo->prepare('UPDATE Cottages SET status = :s WHERE cottage_id = :id');
+                $stmt->execute([':s' => $_POST['status'], ':id' => (int)$_POST['room_id']]);
+                $message = 'Cottage status updated.';
+            }
         }
     }
 
@@ -58,6 +70,11 @@ try {
     
     $where = [];
     $params = [];
+
+    // Validate status against allowed values
+    if ($statusFilter && !in_array($statusFilter, ['Pending', 'Confirmed', 'Checked-In', 'Checked-Out', 'Cancelled'])) {
+        $statusFilter = '';
+    }
 
     if ($searchTerm) {
         $searchCond = "(g.first_name LIKE :s1 OR g.last_name LIKE :s2 OR g.email LIKE :s3";
@@ -114,6 +131,7 @@ try {
                     <td>
                         <div class="action-btn-container">
                             <form method="post" >
+                                <?php echo csrf_field(); ?>
                                 <div class="action-btn">
                                     <input type="hidden" name="action" value="update_reservation_status">
                                     <input type="hidden" name="reservation_id" value="<?php echo (int)$r['reservation_id']; ?>">
@@ -130,6 +148,7 @@ try {
                                 </div>
                             </form>
                             <form method="post"  onsubmit="return confirm('Delete reservation?');">
+                                <?php echo csrf_field(); ?>
                                 <input type="hidden" name="action" value="delete_reservation">
                                 <input type="hidden" name="reservation_id" value="<?php echo (int)$r['reservation_id']; ?>">
                                 <button class="delete-btn" type="submit">
@@ -147,7 +166,8 @@ try {
     }
 
 } catch (Exception $e) {
-    $error = $e->getMessage();
+    error_log('Reservations page error: ' . $e->getMessage());
+    $error = 'An error occurred loading reservations.';
     $recentReservations = [];
 }
 ?>
@@ -265,6 +285,7 @@ try {
                             <td>
                                 <div class="action-btn-container">
                                     <form method="post">
+                                        <?php echo csrf_field(); ?>
                                         <div class="action-btn">
                                             <input type="hidden" name="action" value="update_reservation_status">
                                             <input type="hidden" name="reservation_id" value="<?php echo (int)$r['reservation_id']; ?>">
@@ -282,6 +303,7 @@ try {
                                     </form>
 
                                     <form method="post"  onsubmit="return confirm('Delete reservation?');">
+                                        <?php echo csrf_field(); ?>
                                         <input type="hidden" name="action" value="delete_reservation">
                                         <input type="hidden" name="reservation_id" value="<?php echo (int)$r['reservation_id']; ?>">
                                         <button class="delete-btn" type="submit">

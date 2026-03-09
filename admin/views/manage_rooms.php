@@ -2,6 +2,7 @@
 require_once '../auth/auth_functions.php';
 require_once '../helpers/DB.php';
 require_once '../helpers/RoomModel.php';
+require_once '../inc/csrf.php';
 
 requireLogin();
 requireAdmin();
@@ -15,6 +16,7 @@ $roomModel = new RoomModel();
 $rooms = $roomModel->getAll();
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
+    csrf_verify_or_die();
     $action = $_POST['action'];
     $pdo = DB::getPDO();
 
@@ -44,6 +46,8 @@ $message = '';
 $error = '';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    csrf_verify_or_die();
+
     $cottageNumber = trim($_POST['cottage_number'] ?? '');
     $typeId = $_POST['type_id'] ?? null;
     $price = $_POST['base_price'] ?? 0;
@@ -61,7 +65,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             header('Location: index.php?page=manage_rooms&msg=added');
             exit;
         } catch (Exception $e) {
-            $error = 'Error: ' . $e->getMessage();
+            error_log('Manage rooms error: ' . $e->getMessage());
+            $error = 'An error occurred while adding the cottage. Please try again.';
         }
     }
 }
@@ -141,6 +146,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                 <td><?php echo htmlspecialchars($r['max_occupancy']); ?></td>
                                 <td>
                                     <form method="post" style="display:inline;">
+                                        <?php echo csrf_field(); ?>
                                         <input type="hidden" name="action" value="update_status">
                                         <input type="hidden" name="cottage_id" value="<?php echo $r['cottage_id']; ?>">
                                         <select name="status" class="badge" onchange="this.form.submit()">
@@ -156,6 +162,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                             <img src="static/img/adminpanel_icons/edit.svg" alt="">
                                         </a>
                                         <form method="post" style="display:inline;" onsubmit="return confirm('Delete this cottage?');">
+                                            <?php echo csrf_field(); ?>
                                             <input type="hidden" name="action" value="delete_cottage">
                                             <input type="hidden" name="cottage_id" value="<?php echo $r['cottage_id']; ?>">
                                             <button type="submit" class="delete-btn">
@@ -182,6 +189,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     <?php endif; ?>
 
                     <form method="post">
+                        <?php echo csrf_field(); ?>
                         <div class="form-group">
                             <label class="edit-cottage-label">Cottage Number *</label>
                             <input type="text" name="cottage_number" class="booknow-input" required>

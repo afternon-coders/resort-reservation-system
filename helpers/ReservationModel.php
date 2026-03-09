@@ -6,6 +6,7 @@ class ReservationModel extends BaseModel
 {
     protected string $table = 'Reservations';
     protected string $primaryKey = 'reservation_id';
+    protected ?string $last_token = null;
 
     public function create(array $data): int
     {
