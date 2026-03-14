@@ -165,6 +165,10 @@ td {
     align-items: center;
 }
 
+.cottage-card:hover {
+    background-color: #fdfcf8;
+}
+
 .img-container {
     display: flex;
     width: 20%;

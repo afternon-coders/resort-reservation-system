@@ -191,12 +191,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     <form method="post">
                         <div class="form-group">
                             <label class="edit-cottage-label">Cottage Number *</label>
-                            <input type="text" name="cottage_number" class="booknow-input" required>
+                            <input type="text" name="cottage_number" class="booknow-input" style="background-color: transparent; border: 1.5px solid #e2e8f0;" required>
                         </div>
 
                         <div class="form-group">
                             <label class="edit-cottage-label">Cottage Type *</label>
-                            <select name="type_id" class="booknow-select" required>
+                            <select name="type_id" class="booknow-select" style="background-color: transparent; border: 1.5px solid #e2e8f0;" required>
                                 <?php foreach ($types as $t): ?>
                                     <option value="<?php echo $t['type_id']; ?>"><?php echo htmlspecialchars($t['name']); ?></option>
                                 <?php endforeach; ?>
@@ -205,12 +205,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
                         <div class="form-group" style="margin-top:15px;">
                             <label class="edit-cottage-label">Base Price (₱)</label>
-                            <input type="number" name="base_price" step="0.01" class="booknow-input" value="0.00">
+                            <input type="number" name="base_price" step="0.01" class="booknow-input" style="background-color: transparent; border: 1.5px solid #e2e8f0;" value="0.00">
                         </div>
 
                         <div class="form-group" style="margin-top:15px;">
                             <label class="edit-cottage-label">Max Occupancy</label>
-                            <input type="number" name="max_occupancy" class="booknow-input" value="2">
+                            <input type="number" name="max_occupancy" class="booknow-input" style="background-color: transparent; border: 1.5px solid #e2e8f0;" value="2">
                         </div>
 
                         <div class="form-group" style="margin-top:15px;">
@@ -228,7 +228,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         </div>
 
                         <div style="margin-top:20px;">
-                            <button type="submit" class="btn btn-primary">Save Cottage</button>
+                            <button type="submit" class="btn btn-primary">
+                                <span>
+                                    <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#fff"><path d="M840-680v480q0 33-23.5 56.5T760-120H200q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h480l160 160Zm-80 34L646-760H200v560h560v-446ZM565-275q35-35 35-85t-35-85q-35-35-85-35t-85 35q-35 35-35 85t35 85q35 35 85 35t85-35ZM240-560h360v-160H240v160Zm-40-86v446-560 114Z"/></svg>
+                                </span>
+                                Save Cottage
+                            </button>
                         </div>
                     </form>
                 </div>
