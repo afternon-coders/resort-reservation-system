@@ -238,15 +238,20 @@ function admin_update_reservation_status(PDO $pdo, int $reservationId, string $s
 
     $currentStatus = (string)($reservation['status'] ?? '');
 
-    if ($status === 'Checked-In' && admin_reservations_has_column($pdo, 'checked_in_at')) {
-        if ($currentStatus !== 'Checked-In') {
-            $updateStmt = $pdo->prepare('UPDATE Reservations SET status = :status, checked_in_at = NOW() WHERE reservation_id = :id');
-        } else {
-            $updateStmt = $pdo->prepare('UPDATE Reservations SET status = :status WHERE reservation_id = :id');
+    $setFields = ['status = :status'];
+
+    if ($status === 'Checked-In') {
+        if (admin_reservations_has_column($pdo, 'checked_in_at') && $currentStatus !== 'Checked-In') {
+            $setFields[] = 'checked_in_at = NOW()';
         }
-    } else {
-        $updateStmt = $pdo->prepare('UPDATE Reservations SET status = :status WHERE reservation_id = :id');
+        if (admin_reservations_has_column($pdo, 'checked_out_at')) {
+            $setFields[] = 'checked_out_at = NULL';
+        }
+    } elseif ($status === 'Checked-Out' && admin_reservations_has_column($pdo, 'checked_out_at')) {
+        $setFields[] = 'checked_out_at = COALESCE(checked_out_at, NOW())';
     }
+
+    $updateStmt = $pdo->prepare('UPDATE Reservations SET ' . implode(', ', $setFields) . ' WHERE reservation_id = :id');
 
     $updateStmt->execute([
         ':status' => $status,
@@ -623,14 +628,17 @@ function admin_process_payment(PDO $pdo, array $input): array
             ':transaction_ref' => $transactionRef,
         ]);
 
-        // Update reservation to Checked-In and record the real check-in timestamp when supported.
+        // Update reservation to Checked-In and keep checkout timestamp fields in sync.
+        $checkInSet = ["status = 'Checked-In'"];
         if (admin_reservations_has_column($pdo, 'checked_in_at')) {
-            $pdo->prepare("UPDATE Reservations SET status = 'Checked-In', checked_in_at = NOW() WHERE reservation_id = :id")
-                ->execute([':id' => $reservationId]);
-        } else {
-            $pdo->prepare("UPDATE Reservations SET status = 'Checked-In' WHERE reservation_id = :id")
-                ->execute([':id' => $reservationId]);
+            $checkInSet[] = 'checked_in_at = NOW()';
         }
+        if (admin_reservations_has_column($pdo, 'checked_out_at')) {
+            $checkInSet[] = 'checked_out_at = NULL';
+        }
+
+        $pdo->prepare("UPDATE Reservations SET " . implode(', ', $checkInSet) . " WHERE reservation_id = :id")
+            ->execute([':id' => $reservationId]);
 
         // Mark assigned cottages as Occupied
         $pdo->prepare(
