@@ -191,6 +191,14 @@ function admin_dispatch_action(PDO $pdo, string $action, array $input): array
         case 'create_cottage': {
             return admin_create_cottage($pdo, $input);
         }
+                case 'update_cottage': {
+            $cottageId = admin_positive_int($input['cottage_id'] ?? null);
+            if ($cottageId === null) {
+                return ['ok' => false, 'message' => 'Invalid cottage id.'];
+            }
+
+            return admin_update_cottage($pdo, $cottageId, $input);
+        }
 
         case 'process_payment': {
             return admin_process_payment($pdo, $input);
@@ -349,7 +357,6 @@ function admin_delete_cottage(PDO $pdo, int $cottageId): array
         throw $e;
     }
 }
-
 function admin_create_cottage(PDO $pdo, array $input): array
 {
     $validation = admin_validate_cottage_payload($pdo, $input);
@@ -362,17 +369,16 @@ function admin_create_cottage(PDO $pdo, array $input): array
 
     $data = $validation['data'];
     $stmt = $pdo->prepare(
-        'INSERT INTO Cottages (cottage_number, type_id, base_price, max_occupancy, status, description)
-         VALUES (:cottage_number, :type_id, :base_price, :max_occupancy, :status, :description)'
+        'INSERT INTO Cottages (cottage_number, type_id, base_price, max_occupancy, status)
+         VALUES (:cottage_number, :type_id, :base_price, :max_occupancy, :status)'
     );
 
     $stmt->execute([
         ':cottage_number' => $data['cottage_number'],
-        ':type_id' => $data['type_id'],
-        ':base_price' => $data['base_price'],
-        ':max_occupancy' => $data['max_occupancy'],
-        ':status' => $data['status'],
-        ':description' => $data['description'],
+        ':type_id'        => $data['type_id'],
+        ':base_price'     => $data['base_price'],
+        ':max_occupancy'  => $data['max_occupancy'],
+        ':status'         => $data['status'],
     ]);
 
     return ['ok' => true, 'message' => 'Cottage added successfully.'];
@@ -401,19 +407,17 @@ function admin_update_cottage(PDO $pdo, int $cottageId, array $input): array
              type_id = :type_id,
              base_price = :base_price,
              max_occupancy = :max_occupancy,
-             status = :status,
-             description = :description
+             status = :status
          WHERE cottage_id = :cottage_id'
     );
 
     $stmt->execute([
         ':cottage_number' => $data['cottage_number'],
-        ':type_id' => $data['type_id'],
-        ':base_price' => $data['base_price'],
-        ':max_occupancy' => $data['max_occupancy'],
-        ':status' => $data['status'],
-        ':description' => $data['description'],
-        ':cottage_id' => $cottageId,
+        ':type_id'        => $data['type_id'],
+        ':base_price'     => $data['base_price'],
+        ':max_occupancy'  => $data['max_occupancy'],
+        ':status'         => $data['status'],
+        ':cottage_id'     => $cottageId,
     ]);
 
     return ['ok' => true, 'message' => 'Cottage updated successfully.'];

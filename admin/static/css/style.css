@@ -53,6 +53,15 @@ header {
     flex-wrap:wrap; 
 }
 
+.col {
+    display: flex;
+    flex-direction: column;
+}
+
+.row {
+    display: flex;
+    flex-direction: row;
+}
 .card-stat-content {
     display: flex;
 }
@@ -231,6 +240,7 @@ td {
     background-color: #fff3cd;
     color: #856404;
 }
+
 /* Action container */
 .action-btn-container {
     min-width: 100%;
@@ -277,6 +287,30 @@ td {
 .delete-btn:hover {
     background-color: var(--success-color);
 }
+
+#cancel-edit-btn {
+    background-color: transparent;
+    border: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 4px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 50px;                       
+}
+
+#cancel-edit-btn:hover {
+    background-color: var(--danger-color);
+    color: #fff;
+}
+    
 
 /* STATUS BADGES */
 
@@ -401,10 +435,9 @@ select.cancel  {
 
 .btn {
     height: 35px;
-    width: 170px;
-
+    width: 100%;
     display: flex;
-    justify-content: flex-start;
+    justify-content: center;
     margin-top: 0px !important;
     gap: 10px;
     padding: 8px 10px;
