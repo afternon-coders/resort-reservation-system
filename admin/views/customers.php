@@ -79,10 +79,13 @@ window.onload = function() {
         <h1>Customers</h1>
         <p>View and manage customer information</p>
     </div>
-    <div class="search-section">
-        <div class="search-wrapper">
-        <input type="text" id="customerSearch" placeholder="Search customers..." class="search-input">
-    </div>
+    <div style="margin-top:20px;" class="card">
+        <h3>Search Customers</h3>
+        <div class="search-section">
+            <div class="search-wrapper">
+            <input type="text" id="customerSearch" placeholder="Search customers..." class="search-input">
+        </div>
+        </div>
     </div>
     
 
