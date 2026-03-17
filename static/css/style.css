@@ -125,9 +125,24 @@ body {
     transition: 0.3s;
 }
 
+/* Client side active link */
 .nav-links a:hover,
 .nav-links a.active {
     color: var(--primary-color);
+}
+
+/* Admin sidebar active link */
+.sidebar li.active {
+    background-color: rgba(255, 255, 255, 0.080);
+    border-radius: 8px;
+}
+
+.sidebar li.active a {
+    font-weight: 600;
+}
+
+.sidebar li.active img {
+    /* filter: brightness(0) invert(1); */
 }
 
 

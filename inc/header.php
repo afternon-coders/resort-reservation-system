@@ -190,15 +190,45 @@ $user = $isLoggedIn ? getCurrentUser() : null;
         </div>
     
     <script>
-    function toggleDropdown() {
-        document.getElementById("dropdownMenu").classList.toggle("show");
-    }
-
-    window.onclick = function(event) {
-        if (!event.target.closest('.profile-dropdown')) {
-            document.getElementById("dropdownMenu").classList.remove("show");
+        function toggleDropdown() {
+            document.getElementById("dropdownMenu").classList.toggle("show");
         }
-    }
+
+        window.onclick = function(event) {
+            if (!event.target.closest('.profile-dropdown')) {
+                document.getElementById("dropdownMenu").classList.remove("show");
+            }
+        }
+        
+        // Navbar in client side active state logic
+        function setActiveNav() {
+            const currentPage = new URLSearchParams(window.location.search).get('page') || 'home';
+            const navLinks = document.querySelectorAll('.nav-links a');
+
+            navLinks.forEach(link => {
+                const linkPage = new URLSearchParams(link.search).get('page');
+                if (linkPage === currentPage) {
+                    link.classList.add('active');
+                }
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', setActiveNav);
+
+        //  Admin sidebar active state logic
+        function setActiveSidebar() {
+            const currentPage = new URLSearchParams(window.location.search).get('page') || 'dashboard';
+            const sidebarLinks = document.querySelectorAll('.sidebar a');
+
+            sidebarLinks.forEach(link => {
+                const linkPage = new URLSearchParams(link.search).get('page');
+                if (linkPage === currentPage) {
+                    link.parentElement.classList.add('active');
+                }
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', setActiveSidebar);
     </script>
 </body>
 </html>
