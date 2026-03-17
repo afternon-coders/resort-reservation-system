@@ -160,7 +160,7 @@
                                     <input type="hidden" name="action" value="update_status">
                                     <input type="hidden" name="csrf_token" value="<?php echo htmlspecialchars($csrfToken); ?>">
                                     <input type="hidden" name="cottage_id" value="<?php echo $r['cottage_id']; ?>">
-                                    <select name="status" class="badge"
+                                    <select name="status" class="badge" style="margin-top: 5px;"
                                         onclick="event.stopPropagation()"
                                         onchange="event.stopPropagation(); updateSelectClass(this); this.form.submit()">
                                         <option value="Available" <?php echo $r['status'] === 'Available' ? 'selected' : ''; ?>>Available</option>

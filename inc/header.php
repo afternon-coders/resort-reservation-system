@@ -237,7 +237,7 @@ if ($isLoggedIn) {
 
                                 <div class="dropdown-menu" id="dropdownMenu">
                                     <!-- Changed from href to onclick to open modal -->
-                                    <a href="#" onclick="openProfileModal(); return false;">My Profile</a>
+                                    <a href="#" style="color: #555;" onclick="openProfileModal(); return false;">My Profile</a>
                                     <hr>
                                     <a href="/auth/logout.php" class="logout">Logout</a>
                                 </div>

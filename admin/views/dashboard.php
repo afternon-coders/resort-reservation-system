@@ -170,7 +170,19 @@ window.onload = function() {
                             <td><?php echo htmlspecialchars($r['cottage_number'] ?? '—'); ?></td>
                             <td><?php echo htmlspecialchars($r['check_in_date']); ?></td>
                             <td><?php echo htmlspecialchars($r['check_out_date']); ?></td>
-                            <td><?php echo htmlspecialchars($r['status']); ?></td>
+                            <td>
+                                <form method="post" style="display:inline-block;margin-right:6px;">
+                                    <div class="action-btn">
+                                        <select name="status" class="badge" onchange="updateSelectClass(this)">
+                                            <option value="Pending" class="pending" <?php echo strtolower($r['status'])==='pending' ? 'selected' : '' ?>>Pending</option>
+                                            <option value="Confirmed" class="confirm" <?php echo strtolower($r['status'])==='confirmed' ? 'selected' : '' ?>>Confirmed</option>
+                                            <option value="Checked-In" class="check-in" <?php echo strtolower($r['status'])==='checked-in' || strtolower($r['status'])==='checked_in' ? 'selected' : '' ?>>Checked-In</option>
+                                            <option value="Checked-Out" class="check-out" <?php echo strtolower($r['status'])==='checked-out' || strtolower($r['status'])==='checked_out' ? 'selected' : '' ?>>Checked-Out</option>
+                                            <option value="Cancelled" class="cancel" <?php echo strtolower($r['status'])==='cancelled' ? 'selected' : '' ?>>Cancelled</option>
+                                        </select>
+                                    </div>
+                                </form>
+                            </td>
                             <td>
                                 <div class="action-btn-container">
                                     <form method="post" style="display:inline-block;margin-right:6px;">
@@ -178,13 +190,6 @@ window.onload = function() {
                                             <input type="hidden" name="action" value="update_reservation_status" onchange="updateSelectClass(this)">
                                             <input type="hidden" name="csrf_token" value="<?php echo htmlspecialchars($csrfToken); ?>">
                                             <input type="hidden" name="reservation_id" value="<?php echo (int)$r['reservation_id']; ?>">
-                                            <select name="status" class="badge" onchange="updateSelectClass(this)">
-                                                <option value="Pending" class="pending" <?php echo strtolower($r['status'])==='pending' ? 'selected' : '' ?>>Pending</option>
-                                                <option value="Confirmed" class="confirm" <?php echo strtolower($r['status'])==='confirmed' ? 'selected' : '' ?>>Confirmed</option>
-                                                <option value="Checked-In" class="check-in" <?php echo strtolower($r['status'])==='checked-in' || strtolower($r['status'])==='checked_in' ? 'selected' : '' ?>>Checked-In</option>
-                                                <option value="Checked-Out" class="check-out" <?php echo strtolower($r['status'])==='checked-out' || strtolower($r['status'])==='checked_out' ? 'selected' : '' ?>>Checked-Out</option>
-                                                <option value="Cancelled" class="cancel" <?php echo strtolower($r['status'])==='cancelled' ? 'selected' : '' ?>>Cancelled</option>
-                                            </select>
                                             <button class="refresh-btn" type="submit">
                                                 <img src="/admin/static/img//adminpanel_icons/refresh.svg" alt="">
                                             </button>

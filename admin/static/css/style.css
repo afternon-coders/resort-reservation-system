@@ -263,39 +263,19 @@ td {
     display: flex;
     justify-content: flex-start;
     gap: 2px;
-    padding: 0px 0px;
+    padding: 5px 0px;
 }
 
 /* Action button */
-.action-btn {
-    background-color: transparent;
-    display: flex;
-    justify-content: flex-start;
-    justify-content: center;
-}
-
-.edit-btn {
-    height: 25px;
-    width: 25px;
-    padding: 2px 0px;
-    border: none;
-    background-color: transparent;
-}
-
-.refresh-btn {
-    height: 25px;
-    width: 25px;
-    padding: 2px 0px;
-    border: none;
-    background-color: transparent;
-}
-
 .delete-cottage-btn {
+    display: flex;
+    justify-content: center;
+
     height: 40px;
     width: 40px;
     padding: 8px;
     border: none;
-    border-radius: 8px;
+    border-radius: 5px;
     background-color: transparent;
 }
 
@@ -667,7 +647,7 @@ th {
 /* ── Action Buttons (consistent with dashboard) ───────────── */
 .action-btn-container {
     display: flex;
-    gap: 8px;
+    gap: 0px;
     align-items: center;
 }
 
@@ -700,19 +680,9 @@ th {
 }
 
 /* ── Status Badges (consistent styling) ───────────────────── */
-/* .badge {
-    width: 120px;
-    padding: 6px 8px;
-    border-radius: 16px;
-    font-size: 13px;
-    font-weight: 500;
-    border: none;
-    cursor: pointer;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23666' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
-    background-repeat: no-repeat;
-    background-position: right 8px center;
+.badge {
 
-} */
+} 
 
 .badge.pending { background: #fef3c7; color: #92400e; }
 .badge.confirm { background: #dbeafe; color: #1e40af; }
