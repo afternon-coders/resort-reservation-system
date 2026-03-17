@@ -31,12 +31,37 @@ body {
     margin: 0;
 }
 
+#js-alert {
+    display: none;
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 9999;
+    padding: 14px 20px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    min-width: 250px;
+    transition: opacity 0.4s ease;
+}
 
 /* CONTAINER */
 .container {
     max-width: 1200px;
     margin: auto;
     padding: 0 20px;
+}
+
+.col {
+    display: flex;
+    flex-direction: column;
+}
+
+.row {
+    display: flex;
+    flex-direction: row;
 }
 
 
@@ -222,6 +247,17 @@ body {
 
 .show {
     display: flex;
+}
+
+.save-profile-btn {
+    width: 100%;
+}
+
+.cancel-profile-btn {
+    width: 100%; 
+    color: var(--text-secondary-color) !important;
+    background-color: var(--card-color) !important;
+    border: 1px solid var(--border-color) !important;
 }
 
 /* ========================= */

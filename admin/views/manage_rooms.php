@@ -65,21 +65,7 @@
 <body>
 
     <!-- Floating JS Alert -->
-    <div id="js-alert" style="
-        display: none;
-        position: fixed;
-        top: 20px;
-        left: 50%;
-        transform: translateX(-50%);
-        z-index: 9999;
-        padding: 14px 20px;
-        border-radius: 8px;
-        font-size: 14px;
-        font-weight: 500;
-        box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-        min-width: 250px;
-        transition: opacity 0.4s ease;
-    "></div>
+    <div id="js-alert"></div>
 
     <?php if ($message): ?>
         <script>document.addEventListener('DOMContentLoaded', () => showAlert('success', '<?php echo addslashes(htmlspecialchars($message)); ?>'));</script>
