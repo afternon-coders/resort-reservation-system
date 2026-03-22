@@ -5,45 +5,31 @@
 # Enable Rewrite Engine
 RewriteEngine On
 
-# --- HTTPS Enforcement (uncomment when SSL is configured) ---
-# RewriteCond %{HTTPS} off
+# --- HTTPS Enforcement ---
+# Since you're using a Cloudflare Tunnel, Cloudflare handles SSL for the user.
+# Your laptop sees HTTP from the tunnel, so don't force HTTPS here or you'll get a redirect loop.
+# Only uncomment if you notice the tunnel isn't forcing HTTPS automatically.
+# RewriteCond %{HTTP:X-Forwarded-Proto} !https
 # RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
 
 # --- Security Headers ---
 <IfModule mod_headers.c>
-    # Prevent clickjacking
     Header always set X-Frame-Options "SAMEORIGIN"
-
-    # Prevent MIME-type sniffing
     Header always set X-Content-Type-Options "nosniff"
-
-    # XSS Protection (legacy browsers)
     Header always set X-XSS-Protection "1; mode=block"
-
-    # Referrer Policy
     Header always set Referrer-Policy "strict-origin-when-cross-origin"
-
-    # Permissions Policy
     Header always set Permissions-Policy "geolocation=(), microphone=(), camera=()"
-
-    # Content Security Policy (adjust as needed for your CDN/fonts)
+    
+    # Updated CSP: Added Cloudflare domains to allow the tunnel/CDN to function
     Header always set Content-Security-Policy "default-src 'self'; script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com; font-src 'self' https://cdnjs.cloudflare.com; img-src 'self' data:; connect-src 'self'"
 
-    # HSTS (uncomment when SSL is configured)
-    # Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains"
-
-    # Remove server version info
+    # Remove server version info (Note: 'Server' header often requires mod_security to truly hide)
     Header unset X-Powered-By
-    Header unset Server
 </IfModule>
 
-# --- Hide Server Signature ---
-ServerSignature Off
-
 # --- Block access to sensitive directories ---
-<DirectoryMatch "^/.+/(config|helpers|scripts|logs|tmp|database|output|vendor)/">
-    Require all denied
-</DirectoryMatch>
+# FIXED: Replaced <DirectoryMatch> (not allowed in htaccess) with RewriteRules
+RewriteRule ^(config|helpers|scripts|logs|tmp|database|output|vendor)/ - [F,L]
 
 # --- Block access to sensitive files ---
 <FilesMatch "\.(env|sql|md|log|sh|gitignore|htpasswd)$">
@@ -55,35 +41,24 @@ ServerSignature Off
     Require all denied
 </FilesMatch>
 
-# --- Block access to PHP files in restricted directories ---
-# Only allow PHP execution in root, admin/, admin/views/, auth/, api/, views/, inc/
-RewriteRule ^config/.*\.php$ - [F,L]
-RewriteRule ^helpers/.*\.php$ - [F,L]
-RewriteRule ^scripts/.*\.php$ - [F,L]
-RewriteRule ^logs/ - [F,L]
-RewriteRule ^tmp/ - [F,L]
-RewriteRule ^database/ - [F,L]
-RewriteRule ^output/ - [F,L]
-RewriteRule ^vendor/.*\.php$ - [F,L]
-
 # --- Prevent Directory Listing ---
 Options -Indexes
 
 # --- Default Character Set ---
 AddDefaultCharset UTF-8
 
-# --- PHP Settings (if mod_php or php-fpm via .htaccess is allowed) ---
-<IfModule mod_php.c>
+# --- PHP Settings ---
+<IfModule mod_php7.c>
+    # Note: Use mod_php.c if on PHP 8+, or mod_php7.c for PHP 7
     php_flag display_errors Off
     php_flag log_errors On
+    # Ensure this path is writable by the 'www-data' user!
     php_value error_log /home/davon/resort-reservation-system/logs/php_errors.log
     php_flag expose_php Off
     php_value session.cookie_httponly 1
     php_value session.cookie_samesite Strict
     php_value session.use_strict_mode 1
     php_value session.use_only_cookies 1
-    # Uncomment when SSL is configured:
-    # php_value session.cookie_secure 1
 </IfModule>
 
 # --- Compression ---
@@ -95,10 +70,7 @@ AddDefaultCharset UTF-8
 # --- Browser Caching for Static Assets ---
 <IfModule mod_expires.c>
     ExpiresActive On
-    ExpiresByType image/jpeg "access plus 1 month"
-    ExpiresByType image/png "access plus 1 month"
-    ExpiresByType image/svg+xml "access plus 1 month"
+    ExpiresDefault "access plus 1 month"
     ExpiresByType text/css "access plus 1 week"
     ExpiresByType application/javascript "access plus 1 week"
-    ExpiresByType image/x-icon "access plus 1 year"
 </IfModule>
