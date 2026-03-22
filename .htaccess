@@ -1,30 +1,70 @@
+# =============================================================================
 # Apache2 Configuration for Resort Reservation System
+# =============================================================================
+
+# Enable Rewrite Engine
 RewriteEngine On
+
+# --- HTTPS Enforcement (uncomment when SSL is configured) ---
+# RewriteCond %{HTTPS} off
+# RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
 
 # --- Security Headers ---
 <IfModule mod_headers.c>
+    # Prevent clickjacking
     Header always set X-Frame-Options "SAMEORIGIN"
+
+    # Prevent MIME-type sniffing
     Header always set X-Content-Type-Options "nosniff"
+
+    # XSS Protection (legacy browsers)
     Header always set X-XSS-Protection "1; mode=block"
+
+    # Referrer Policy
     Header always set Referrer-Policy "strict-origin-when-cross-origin"
+
+    # Permissions Policy
     Header always set Permissions-Policy "geolocation=(), microphone=(), camera=()"
+
+    # Content Security Policy (adjust as needed for your CDN/fonts)
     Header always set Content-Security-Policy "default-src 'self'; script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com; font-src 'self' https://cdnjs.cloudflare.com; img-src 'self' data:; connect-src 'self'"
+
+    # HSTS (uncomment when SSL is configured)
+    # Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains"
+
+    # Remove server version info
     Header unset X-Powered-By
+    Header unset Server
 </IfModule>
 
+# --- Hide Server Signature ---
+ServerSignature Off
+
 # --- Block access to sensitive directories ---
-# Replaced <DirectoryMatch> with RewriteRules (Safe for .htaccess)
-RewriteRule ^(config|helpers|scripts|logs|tmp|database|output|vendor)/ - [F,L]
+<DirectoryMatch "^/.+/(config|helpers|scripts|logs|tmp|database|output|vendor)/">
+    Require all denied
+</DirectoryMatch>
 
 # --- Block access to sensitive files ---
 <FilesMatch "\.(env|sql|md|log|sh|gitignore|htpasswd)$">
     Require all denied
 </FilesMatch>
 
-# Block access to dot files
+# Block access to dot files (like .git, .env, etc.)
 <FilesMatch "^\.">
     Require all denied
 </FilesMatch>
+
+# --- Block access to PHP files in restricted directories ---
+# Only allow PHP execution in root, admin/, admin/views/, auth/, api/, views/, inc/
+RewriteRule ^config/.*\.php$ - [F,L]
+RewriteRule ^helpers/.*\.php$ - [F,L]
+RewriteRule ^scripts/.*\.php$ - [F,L]
+RewriteRule ^logs/ - [F,L]
+RewriteRule ^tmp/ - [F,L]
+RewriteRule ^database/ - [F,L]
+RewriteRule ^output/ - [F,L]
+RewriteRule ^vendor/.*\.php$ - [F,L]
 
 # --- Prevent Directory Listing ---
 Options -Indexes
@@ -32,20 +72,33 @@ Options -Indexes
 # --- Default Character Set ---
 AddDefaultCharset UTF-8
 
-# --- PHP Settings ---
-<IfModule mod_php7.c>
-    # Note: Use mod_php.c or mod_php7.c depending on your version
+# --- PHP Settings (if mod_php or php-fpm via .htaccess is allowed) ---
+<IfModule mod_php.c>
     php_flag display_errors Off
     php_flag log_errors On
     php_value error_log /home/davon/resort-reservation-system/logs/php_errors.log
+    php_flag expose_php Off
+    php_value session.cookie_httponly 1
+    php_value session.cookie_samesite Strict
+    php_value session.use_strict_mode 1
+    php_value session.use_only_cookies 1
+    # Uncomment when SSL is configured:
+    # php_value session.cookie_secure 1
 </IfModule>
 
-# --- Compression & Caching ---
+# --- Compression ---
 <IfModule mod_deflate.c>
-    AddOutputFilterByType DEFLATE text/html text/plain text/css application/json application/javascript
+    AddOutputFilterByType DEFLATE text/html text/plain text/css application/json
+    AddOutputFilterByType DEFLATE application/javascript text/xml application/xml
 </IfModule>
 
+# --- Browser Caching for Static Assets ---
 <IfModule mod_expires.c>
     ExpiresActive On
-    ExpiresDefault "access plus 1 week"
+    ExpiresByType image/jpeg "access plus 1 month"
+    ExpiresByType image/png "access plus 1 month"
+    ExpiresByType image/svg+xml "access plus 1 month"
+    ExpiresByType text/css "access plus 1 week"
+    ExpiresByType application/javascript "access plus 1 week"
+    ExpiresByType image/x-icon "access plus 1 year"
 </IfModule>
