@@ -159,7 +159,7 @@ window.onload = function() {
                 <h3>Recent Reservations</h3>
                 <button class="refresh-btn" type="submit" style="margin-left: auto; margin-right: 5px;">
                     <img src="/admin/static/img//adminpanel_icons/refresh.svg" alt="">
-                    update
+                    Update
                 </button>
             </div>
             <?php if (empty($recentReservations)): ?>
@@ -207,7 +207,7 @@ window.onload = function() {
                                         <input type="hidden" name="reservation_id" value="<?php echo (int)$r['reservation_id']; ?>">
                                         <button class="delete-btn" type="submit">
                                             <img src="/admin/static/img//adminpanel_icons/delete.svg" alt="">
-                                            delete
+                                            Delete
                                         </button>
                                     </form>
                                 </div>

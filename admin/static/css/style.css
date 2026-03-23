@@ -620,22 +620,6 @@ th {
 }
 
 
-.refresh-btn {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 2px;
-
-    height: 25px;
-    width: 80px;
-    background: none;
-    border: none;
-    cursor: pointer;
-    padding: 2px;
-    border-radius: 4px;
-    transition: background 0.2s;
-}
-
 .manage-room-del-btn {
     display: flex;
     width: 50px;
@@ -651,7 +635,27 @@ th {
 
     height: 25px;
     width: 80px;
-    background: none;
+    background: #fdecea;
+    border: none;
+    cursor: pointer;
+    padding: 2px;
+    border-radius: 4px;
+    transition: background 0.2s;
+}
+
+.delete-btn:hover {
+    background: #f5c2c2;
+}
+
+.refresh-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2px;
+
+    height: 25px;
+    width: 80px;
+    background: #e7f7ed;
     border: none;
     cursor: pointer;
     padding: 2px;
@@ -660,12 +664,9 @@ th {
 }
 
 .refresh-btn:hover {
-    background: #e7f7ed;
+    background: #5be28855;
 }
 
-.delete-btn:hover {
-    background: #fdecea;
-}
 
 .refresh-btn img, .delete-btn img {
     width: 18px;
