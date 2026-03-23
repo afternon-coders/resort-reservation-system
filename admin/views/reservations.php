@@ -221,9 +221,9 @@ try {
             <h3>Search Reservations</h3>
             <form method="get" id="searchForm">
                 <input type="hidden" name="page" value="reservations">
-                <input type="text" name="search" placeholder="Search reservations" value="<?php echo htmlspecialchars($searchTerm); ?>" autocomplete="off">
-                <button type="submit">Search</button>
-                <button type="submit" name="clear">Clear</button>
+                <input class="search-input-reservation" type="text" name="search" placeholder="Search reservations" value="<?php echo htmlspecialchars($searchTerm); ?>" autocomplete="off">
+                <button class="btn-search" type="submit">Search</button>
+                <button class="btn-clear" type="submit" name="clear">Clear</button>
                 <select name="status">
                     <option value="">All Statuses</option>
                     <option value="Pending" <?php echo $statusFilter === 'Pending' ? 'selected' : ''; ?>>Pending</option>
