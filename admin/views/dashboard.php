@@ -114,6 +114,7 @@ window.onload = function() {
     <div class="">
         <div class="admin-header">
             <h1>Admin Dashboard</h1>
+            <p>Welcome back! Here is your resort overview.</p>
         </div>
         <?php if ($error): ?>
             <div style="padding:12px;background:#fdecea;border:1px solid #f5c2c2;color:#6b0b0b;border-radius:4px;margin-bottom:12px;">Error: <?php echo htmlspecialchars($error); ?></div>
