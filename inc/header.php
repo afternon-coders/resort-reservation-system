@@ -1,14 +1,17 @@
 <?php
-// Ensure auth functions are available
-if (file_exists(__DIR__ . '/../auth/auth_functions.php')) {
-    require_once __DIR__ . '/../auth/auth_functions.php';
-}
+// Auth helpers are required by this shared header.
+require_once __DIR__ . '/../auth/auth_functions.php';
 
 // Auto-run reservation status logic on every page load
 if (file_exists(__DIR__ . '/../helpers/ReservationModel.php')) {
     require_once __DIR__ . '/../helpers/ReservationModel.php';
-    $reservationModel = new ReservationModel();
-    $reservationModel->autoUpdateStatuses();
+    try {
+        $reservationModel = new ReservationModel();
+        $reservationModel->autoUpdateStatuses();
+    } catch (\Throwable $e) {
+        // Do not crash all pages if background status sync fails.
+        error_log('Reservation auto-update failed: ' . $e->getMessage());
+    }
 }
 
 // Handle profile update POST
@@ -21,6 +24,10 @@ if (isset($_POST['action']) && $_POST['action'] === 'update_profile') {
     $userModel = new UserModel();
     $guestModel = new GuestModel();
     $currentUser = getCurrentUser();
+    if (empty($currentUser['user_id'])) {
+        $profileMsg = 'You must be logged in to update your profile.';
+        $profileMsgType = 'error';
+    } else {
     $userdata = $userModel->getById($currentUser['user_id']);
 
     $firstName   = trim($_POST['first_name'] ?? '');
@@ -50,6 +57,7 @@ if (isset($_POST['action']) && $_POST['action'] === 'update_profile') {
             $profileMsg = 'Error: ' . $e->getMessage();
             $profileMsgType = 'error';
         }
+    }
     }
 }
 

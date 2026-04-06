@@ -4,6 +4,8 @@ require_once __DIR__ . '/../helpers/admin_backend.php';
 $error = null;
 $message = '';
 $csrfToken = '';
+$searchTerm = '';
+
 try {
     $pdo = admin_bootstrap();
     $csrfToken = admin_get_csrf_token();
@@ -26,77 +28,75 @@ try {
             $message = $flash['message'];
         }
     }
-    
 
-    $recentUsers = $pdo->query(
-        'SELECT u.user_id, u.username, g.first_name, g.last_name, u.account_email, u.role 
-        FROM Users u
-        LEFT JOIN Guests g ON u.guest_id = g.guest_id
-        WHERE u.role = "guest"
-        ORDER BY u.user_id DESC 
-        LIMIT 8'
-    )->fetchAll();
+    // Search logic
+    $searchTerm = trim((string)($_GET['search'] ?? ''));
+    if (strlen($searchTerm) > 100) {
+        $searchTerm = substr($searchTerm, 0, 100);
+    }
 
+    if (isset($_GET['clear'])) {
+        admin_redirect_to_page('customers');
+    }
+
+    $query = "SELECT u.user_id, u.username, g.first_name, g.last_name, u.account_email, u.role 
+              FROM Users u
+              LEFT JOIN Guests g ON u.guest_id = g.guest_id
+              WHERE u.role = 'guest'";
+
+    $params = [];
+
+    if ($searchTerm) {
+        $query .= " AND (g.first_name LIKE :s1 OR g.last_name LIKE :s2 OR u.account_email LIKE :s3 OR u.username LIKE :s4)";
+        $params[':s1'] = "%$searchTerm%";
+        $params[':s2'] = "%$searchTerm%";
+        $params[':s3'] = "%$searchTerm%";
+        $params[':s4'] = "%$searchTerm%";
+    }
+
+    $query .= " ORDER BY u.user_id DESC LIMIT 50";
+
+    $stmt = $pdo->prepare($query);
+    $stmt->execute($params);
+    $recentUsers = $stmt->fetchAll();
 
 } catch (Throwable $e) {
     $error = $e->getMessage();
-    $roomsTotal = $roomsAvailable = $reservationsTotal = $reservationsPending = $usersTotal = 0;
-    $paymentsTotal = 0.0;
-    $recentReservations = [];
     $recentUsers = [];
 }
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customers</title>
     <link rel="stylesheet" href="/static/css/style.css">
-<title>Content Management</title>
-<script>
-function showTab(tab) {
-    const tabs = document.querySelectorAll('.tab-content');
-    tabs.forEach(t => t.style.display = 'none');
-    document.getElementById(tab).style.display = 'block';
-    const buttons = document.querySelectorAll('.tabs button');
-    buttons.forEach(b => b.classList.remove('active'));
-    document.querySelector('.tabs button[data-tab="'+tab+'"]').classList.add('active');
-}
-window.onload = function() {
-    showTab('homepage'); // default
-}
-</script>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Admin Dashboard</title>
     <link rel="stylesheet" href="static/css/style.css">
 </head>
 <body>
-
 
     <div class="admin-header">
         <h1>Customers</h1>
         <p>View and manage customer information</p>
     </div>
-    <div style="margin-top:20px;" class="card">
-        <h3>Search Customers</h3>
-        <div class="search-section">
-            <div class="search-wrapper">
-            <input type="text" id="customerSearch" placeholder="Search customers..." class="search-input-customer">
-        </div>
-        </div>
-    </div>
-    
 
     <?php if ($error): ?>
-        <div class="error-box">
-            <?php echo htmlspecialchars($error); ?>
-        </div>
+        <div class="error-box"><?php echo htmlspecialchars($error); ?></div>
     <?php endif; ?>
     <?php if ($message): ?>
         <div style="padding:12px;background:#e7f7ed;border:1px solid #b8e0c2;color:#124b26;border-radius:4px;margin-bottom:12px;"><?php echo htmlspecialchars($message); ?></div>
     <?php endif; ?>
+
+    <div style="margin-top:20px;" class="card">
+        <h3>Search Customers</h3>
+        <form method="get" id="searchForm">
+            <input type="hidden" name="page" value="customers">
+            <input class="search-input-customer" type="text" name="search" placeholder="Search customers..." value="<?php echo htmlspecialchars($searchTerm); ?>" autocomplete="off">
+            <button class="btn-search" type="submit">Search</button>
+            <button class="btn-clear" type="submit" name="clear">Clear</button>
+        </form>
+    </div>
 
     <div class="customers-grid">
         <?php if (empty($recentUsers)): ?>
@@ -108,11 +108,9 @@ window.onload = function() {
                         $u['first_name'] ?? '',
                         $u['last_name'] ?? ''
                     ])));
-
                     if (empty($fullName)) {
                         $fullName = $u['username'];
                     }
-
                     $initials = '';
                     if (!empty($u['first_name'])) {
                         $initials .= substr($u['first_name'], 0, 1);
@@ -129,49 +127,19 @@ window.onload = function() {
                         <div class="avatar">
                             <?php echo $initials ?: 'U'; ?>
                         </div>
-
                         <button class="view-btn">View</button>
                     </div>
-
                     <h3><?php echo htmlspecialchars($fullName); ?></h3>
-
                     <div class="customer-info">
                         <div class="info-row">
                             <img src="/static/img/icons/mail.svg" class="icon" alt="email icon">
                             <span><?php echo htmlspecialchars($u['account_email'] ?? ''); ?></span>
                         </div>
-
-
                     </div>
                 </div>
             <?php endforeach; ?>
         <?php endif; ?>
     </div>
 
-<script>
-const searchInput = document.getElementById("customerSearch");
-const cards = document.querySelectorAll(".customer-card");
-const noResults = document.querySelector(".no-results");
-
-searchInput.addEventListener("keyup", function () {
-    const filter = this.value.toLowerCase();
-    let visible = 0;
-
-    cards.forEach(card => {
-        const name = card.querySelector("h3").textContent.toLowerCase();
-
-        if (name.includes(filter)) {
-            card.style.display = "block";
-            visible++;
-        } else {
-            card.style.display = "none";
-        }
-    });
-
-    if (noResults) {
-        noResults.style.display = filter.length > 0 ? "none" : "block";
-    }
-});
-</script>
 </body>
 </html>

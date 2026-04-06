@@ -1,4 +1,5 @@
 <?php
+ob_start();
 // Determine which page to load
 $page = isset($_GET['page']) ? $_GET['page'] : 'home';
 
@@ -9,7 +10,8 @@ $allowed_pages = [
     'amenities',
     'gallery',
     'booknow',
-    'contact'
+    'contact',
+    'receipt'
 ];
 
 // Check if the requested page is allowed
@@ -32,13 +34,13 @@ if (!in_array($page, $allowed_pages)) {
 <body>
 
     <!-- Include header / navbar -->
-    <?php include 'inc/header.php'; ?>
+    <?php include __DIR__ . '/inc/header.php'; ?>
 
     <!-- Main page content -->
     <?php include __DIR__ . "/views/{$page}.php"; ?>
 
     <!-- Include footer -->
-    <?php include 'inc/footer.php'; ?>
+    <?php include __DIR__ . '/inc/footer.php'; ?>
 
 </body>
 </html>

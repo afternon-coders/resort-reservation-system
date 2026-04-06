@@ -260,6 +260,10 @@ body {
     border: 1px solid var(--border-color) !important;
 }
 
+.cancel-profile-btn:hover {
+    background-color: #e7e9ed !important;
+}
+
 /* ========================= */
 /* HOME BUTTONS SECTION */
 /* ========================= */

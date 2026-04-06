@@ -228,9 +228,9 @@ try {
             <h3>Search Reservations</h3>
             <form method="get" id="searchForm">
                 <input type="hidden" name="page" value="reservations">
-                <input type="text" name="search" placeholder="Search reservations" value="<?php echo htmlspecialchars($searchTerm); ?>" autocomplete="off">
-                <button type="submit">Search</button>
-                <button type="submit" name="clear">Clear</button>
+                <input class="search-input-reservation" type="text" name="search" placeholder="Search reservations" value="<?php echo htmlspecialchars($searchTerm); ?>" autocomplete="off">
+                <button class="btn-search" type="submit">Search</button>
+                <button class="btn-clear" type="submit" name="clear">Clear</button>
                 <select name="status">
                     <option value="">All Statuses</option>
                     <option value="Pending" <?php echo $statusFilter === 'Pending' ? 'selected' : ''; ?>>Pending</option>
@@ -243,7 +243,13 @@ try {
         </div>
 
         <div style="margin-top:20px;" class="card">
-            <h3>All Reservations</h3>
+            <div class="row">
+                <h3>All Reservations</h3>
+                <button class="refresh-btn" type="submit" style="margin-left: auto; margin-right: 5px;">
+                    <img src="/admin/static/img//adminpanel_icons/refresh.svg" alt="">
+                    Update
+                </button>
+            </div>
             <table id="reservationTable">
                 <thead>
                     <tr><th>ID</th><th>Guest</th><th>Room</th><th>Check-in</th><th>Check-out</th><th>Status</th><th>Actions</th></tr>
@@ -281,10 +287,6 @@ try {
                                             <input type="hidden" name="action" value="update_reservation_status">
                                             <input type="hidden" name="csrf_token" value="<?php echo htmlspecialchars($csrfToken); ?>">
                                             <input type="hidden" name="reservation_id" value="<?php echo (int)$r['reservation_id']; ?>">
-                                            
-                                            <button class="refresh-btn" type="submit">
-                                                <img src="/admin/static/img//adminpanel_icons/refresh.svg" alt="">
-                                            </button>
                                         </div>
                                     </form>
 
@@ -295,6 +297,7 @@ try {
                                         <input type="hidden" name="reservation_id" value="<?php echo (int)$r['reservation_id']; ?>">
                                         <button class="delete-btn" type="submit">
                                             <img src="/admin/static/img/adminpanel_icons/delete.svg" alt="">
+                                            Delete
                                         </button>
                                     </form>
                                 </div> 
